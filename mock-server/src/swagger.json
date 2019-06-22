@@ -1,0 +1,255 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Cars API",
+    "description": "This is a server for cars",
+    "version": "1.0.0"
+  },
+  "components": {
+    "schemas": {
+      "Color": {
+        "type": "string",
+        "example": "white"
+      },
+      "Manufacturer": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Fiat"
+          },
+          "models": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Marea"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Car": {
+        "type": "object",
+        "properties": {
+          "stockNumber": {
+            "type": "integer",
+            "maximum": 99999,
+            "minimum": 10000,
+            "example": 41400
+          },
+          "manufacturerName": {
+            "type": "string",
+            "example": "Fiat"
+          },
+          "modelName": {
+            "type": "string",
+            "example": "Marea"
+          },
+          "mileage": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "integer",
+                "maximum": 199999,
+                "minimum": 99999,
+                "example": 100141
+              },
+              "unit": {
+                "type": "string",
+                "enum": ["km", "mi"]
+              }
+            }
+          },
+          "fuelType": {
+            "type": "string",
+            "enum": ["Diesel", "Petrol"]
+          },
+          "color": {
+            "$ref": "#/components/schemas/Color"
+          },
+          "pictureUrl": {
+            "type": "string",
+            "example": "http://localhost:3001/car.svg"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/cars": {
+      "get": {
+        "description": "Returns all the cars",
+        "responses": {
+          "200": {
+            "description": "A list of cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cars": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Car"
+                      }
+                    },
+                    "totalPageCount": {
+                      "type": "number",
+                      "example": 2
+                    },
+                    "totalCarsCount": {
+                      "type": "number",
+                      "example": 16
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "manufacturer",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "The manufacturer to filter by",
+            "example": "Fiat"
+          },
+          {
+            "in": "query",
+            "name": "color",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "The color to filter by",
+            "example": "white"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "schema": {
+              "type": "string",
+              "example": "asc",
+              "enum": ["asc", "des"]
+            },
+            "required": false,
+            "description": "When this parameter is present the cars are sorted by mileage. The value of this parameter defines the sorting order"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 1
+            },
+            "required": false,
+            "description": "Results are paginated. This parameter defines the number of the page to return"
+          }
+        ]
+      }
+    },
+    "/cars/{stockNumber}": {
+      "get": {
+        "description": "Returns one car",
+        "responses": {
+          "200": {
+            "description": "A car",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "car": {
+                      "$ref": "#/components/schemas/Car"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A car with the specified stock number was not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Not Found"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stockNumber",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "The unique stock number of a car"
+          }
+        ]
+      }
+    },
+    "/colors": {
+      "get": {
+        "description": "Returns all the colors",
+        "responses": {
+          "200": {
+            "description": "A list of colors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "colors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Color"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/manufacturers": {
+      "get": {
+        "description": "Returns all the manufacturers",
+        "responses": {
+          "200": {
+            "description": "A list of car manufacturers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "manufacturers": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Manufacturer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "cars-mock-server",
+  "version": "1.0.0",
+  "description": "Mock server for cars listing and filtering",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": {
+    "name": "AUTO1 Group GmbH",
+    "url": "https://www.auto1-group.com/"
+  },
+  "contributors": [
+    {
+      "name": "Andres Rojas",
+      "email": "andres.rojas@auto1.com"
+    },
+    {
+      "name": "Raja Pradhan",
+      "email": "raja.pradhan@auto1.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.3",
+    "swagger-jsdoc": "^3.2.3",
+    "swagger-ui-express": "^4.0.1"
+  }
+}
