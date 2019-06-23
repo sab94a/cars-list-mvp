@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navigation /> Should be rendered correctly 1`] = `
+<Memo(Navigation)
+  items={
+    Array [
+      Object {
+        "href": "href",
+        "title": "title",
+      },
+      Object {
+        "href": "href2",
+        "title": "title2",
+      },
+    ]
+  }
+>
+  <nav
+    className="root"
+  >
+    <Link
+      className="link"
+      href="href"
+      key="0"
+    >
+      <a
+        className="link"
+        href="href"
+      >
+        title
+      </a>
+    </Link>
+    <Link
+      className="link"
+      href="href2"
+      key="1"
+    >
+      <a
+        className="link"
+        href="href2"
+      >
+        title2
+      </a>
+    </Link>
+  </nav>
+</Memo(Navigation)>
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Layout> Should render correctly 1`] = `
+<div
+  className="root"
+>
+  <Memo(Header)
+    navigation={
+      Array [
+        Object {
+          "href": "1",
+          "title": "1",
+        },
+      ]
+    }
+  />
+  <main
+    className="content"
+  >
+    text
+  </main>
+  <Footer>
+    footerText
+  </Footer>
+</div>
+`;

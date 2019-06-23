@@ -1,0 +1,15 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    display: flex;
+    flex-direction: row;
+    height: $panel-height;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    font-size: $font-size-sm;
+    padding: 0 $offset-lg;
+    text-decoration: none;
+}

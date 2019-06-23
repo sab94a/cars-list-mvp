@@ -1,0 +1,24 @@
+@import 'components/lib/variables.scss';
+@import 'components/lib/fonts.scss';
+
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: $font-family;
+    color: $dark;
+    font-size: $font-size-sx;
+    margin: 0;
+    padding: 0;
+}
+
+html, body, #root {
+    height: 1px;
+    min-height: 100%;
+}
+
+a {
+    color: $dark;
+}

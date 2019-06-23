@@ -1,0 +1,9 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    display: flex;
+    border-top: $border;
+    height: $panel-height + $border-width;
+    align-items: center;
+    justify-content: center;
+}

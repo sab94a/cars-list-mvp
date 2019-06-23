@@ -1,0 +1,14 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: $border;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0 $offset-lg;
+    height: $panel-height;
+}
