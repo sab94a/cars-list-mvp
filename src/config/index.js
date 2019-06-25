@@ -1,4 +1,4 @@
-import Main from 'components/pages/Main';
+import Main from 'containers/Main';
 import Car from 'components/pages/Car';
 import NotFound from 'components/pages/NotFound';
 

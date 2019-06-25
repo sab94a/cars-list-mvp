@@ -27,7 +27,7 @@ describe('<Layout>', () => {
     it('Should render Header correctly', () => {
         const nav = component.find(Header);
 
-        expect(nav).toHaveLength(1);
+        expect(nav).toHaveLength(1); 
         expect(nav.prop('navigation')).toEqual(navigation);
     });
 
