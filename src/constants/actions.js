@@ -1,0 +1,6 @@
+//@flow
+
+export const GET_CAR: 'GET_CAR' = 'GET_CAR';
+export const GET_CAR_REUQUEST: 'GET_CAR_REUQUEST' = 'GET_CAR_REUQUEST';
+export const GET_CAR_SUCCESS: 'GET_CAR_SUCCESS' = 'GET_CAR_SUCCESS';
+export const GET_CAR_ERROR: 'GET_CAR_ERROR' = 'GET_CAR_ERROR';
