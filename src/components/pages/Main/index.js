@@ -2,6 +2,20 @@
 
 import React from 'react';
 
-const Main = () => (<div>Main</div>)
+type Props = {
+    fetchCars: () => void
+}
+
+class Main extends React.Component<Props> {
+    componentDidMount() {
+        this.props.fetchCars();
+    };
+
+    render() {
+        return (
+            <div>Main</div>
+        )
+    };
+}
 
 export default Main;

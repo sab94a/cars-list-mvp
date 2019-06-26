@@ -1,6 +1,5 @@
 //@flow
 
-import type { Car } from 'types/models';
 import * as A from 'constants/actions';
 
 export type CollectionState<Item> = {
@@ -34,3 +33,16 @@ export type Action =
     GetCarsRequestAction |
     GetCarsSuccessAction |
     GetCarsErrorAction;
+
+export type ApiRequestParams = {
+    endpoint: string,
+    method?: string,
+    query?: mixed,
+    onSuccess?: (res: mixed) => void,
+    onError?: (res: mixed) => void
+};
+
+export type ApiRequest = {
+    type: typeof A.API_REQUEST,
+    types: Array<string>,
+} & ApiRequestParams;

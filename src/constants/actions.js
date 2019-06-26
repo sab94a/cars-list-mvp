@@ -1,4 +1,5 @@
 //@flow
+export const API_REQUEST: 'API_REQUEST' = 'API_REQUEST';
 
 export const GET_CAR: 'GET_CAR' = 'GET_CAR';
 export const GET_CAR_REUQUEST: 'GET_CAR_REUQUEST' = 'GET_CAR_REUQUEST';

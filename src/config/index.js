@@ -21,9 +21,9 @@ export const RoutesMap = {
     }
 };
 
-const Router = [RoutesMap.Root, RoutesMap.Favourite, RoutesMap.Car, RoutesMap.NotFound];
+export const Router = [RoutesMap.Root, RoutesMap.Favourite, RoutesMap.Car, RoutesMap.NotFound];
 
-const Navigation= [{
+export const Navigation= [{
     title: 'Favourite',
     href: RoutesMap.Favourite.path
 }, {
@@ -31,15 +31,6 @@ const Navigation= [{
     href: RoutesMap.Root.path
 }];
 
-const Strings = {
+export const Strings = {
     copyright: '© AUTO1 Group 2018'
 }
-
-const Config = {
-    Router,
-    RoutesMap,
-    Navigation,
-    Strings
-};
-
-export default Config;
