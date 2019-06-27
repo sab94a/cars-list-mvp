@@ -3,7 +3,7 @@
 import qs from 'query-string';
 import { put, call } from "@redux-saga/core/effects";
 import type { Saga } from 'redux-saga';
-import type { ApiRequest, ApiRequestParams } from 'types/store';
+import type { ApiRequest, ApiRequestParams } from 'types/api';
 
 export const makeRequest = ({
     endpoint,

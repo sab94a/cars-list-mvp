@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { fetchCars } from 'actions/api';
 import type { ReduxState } from 'types/store';
 
-const mapStateToProps = ({ cars }:ReduxState) => {
+const mapStateToProps = ({ cars, entities }:ReduxState) => {
+    console.log(cars, entities)
     return { cars }
 }
 

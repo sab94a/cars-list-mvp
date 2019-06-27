@@ -2,33 +2,51 @@
 
 import type { CarState, Action } from 'types/store';
 import {
-    GET_CAR_REUQUEST,
-    GET_CAR_SUCCESS,
-    GET_CAR_ERROR
+    GET_CARS_REUQUEST,
+    GET_CARS_SUCCESS,
+    GET_CARS_ERROR,
+    CLEAR_CARS_PAGES
 } from 'constants/actions';
 
 export const defaultState: CarState = {
-    items: [],
+    pages: {},
     error: null,
-    loading: false
+    loading: false,
+    page: 1,
+    totalPages: 0,
+    totalItems: 0
 }
 
 const carReducer = (state:CarState = defaultState, action: Action):CarState => {
     switch(action.type) {
-        case GET_CAR_REUQUEST:
+        case GET_CARS_REUQUEST:
             return {
                 ...state,
                 loading: true,
                 error: null
             };
-        case GET_CAR_SUCCESS:
+        case GET_CARS_SUCCESS:
+            const { page, totalPages, totalItems, items } = action.payload
             return {
                 ...state,
                 loading: false,
                 error: null,
-                items: action.payload
+                pages: {
+                    ...state.pages,
+                    ...{
+                        [page]: items
+                    }
+                },
+                totalPages,
+                totalItems,
+                page,
             }
-        case GET_CAR_ERROR:
+        case CLEAR_CARS_PAGES:
+            return {
+                ...state,
+                pages: {}
+            }
+        case GET_CARS_ERROR:
             return {
                 ...state,
                 loading: false,

@@ -1,6 +1,7 @@
 //@flow
 
 import * as A from 'constants/actions';
+import type { Car } from './models'
 
 export type CollectionState<Item> = {
     items: Array<Item>,
@@ -8,10 +9,26 @@ export type CollectionState<Item> = {
     error: ?string
 };
 
-export type CarState = CollectionState<number>;
+export type PagesState<Ttem> = {
+    pages: {
+        [number]: Array<Ttem>
+    },
+    page: number,
+    totalPages: number,
+    totalItems: number,
+    loading: boolean,
+    error: ?string
+};
+
+export type CarState = PagesState<number>;
+
+export type EntitiesState = {
+    [string]: Car
+}
 
 export type ReduxState = {
-    cars: CarState
+    cars: CarState,
+    entities: EntitiesState
 };
 
 export type ActionSimple<T> = {
@@ -23,26 +40,37 @@ export type ActionWithData<T, P> = {
     payload: P
 };
 
-export type GetCarsRequest       = ActionSimple<typeof A.GET_CAR>;
-export type GetCarsRequestAction = ActionSimple<typeof A.GET_CAR_REUQUEST>;
-export type GetCarsSuccessAction = ActionWithData<typeof A.GET_CAR_SUCCESS, Array<number>>;
-export type GetCarsErrorAction   = ActionWithData<typeof A.GET_CAR_ERROR, string>;
+export type GetCarsRequest       = ActionSimple<typeof A.GET_CARS>;
+export type GetCarsRequestAction = ActionSimple<typeof A.GET_CARS_REUQUEST>;
+export type GetCarsSuccessPayload = {
+    page: number,
+    items: Array<number>,
+    totalPages: number,
+    totalItems: number,
+}
+export type GetCarsSuccessAction = ActionWithData<typeof A.GET_CARS_SUCCESS, GetCarsSuccessPayload>;
+export type GetCarsErrorAction   = ActionWithData<typeof A.GET_CARS_ERROR, string>;
+export type ClearCarsPagesAction = ActionSimple<typeof A.CLEAR_CARS_PAGES>;
+
+export type EntitiesPayload = {
+    schema: mixed,
+    data: mixed,
+    action: string
+};
+export type EntitiesAction = ActionWithData<typeof A.ENTITIES, EntitiesResolvePayload>;
+
+export type EntitiesResolvePayload = {
+    [string]: mixed
+};
+export type EntitiesResolveAction = ActionWithData<typeof A.ENTITIES_RESOLVE, EntitiesResolvePayload>;
 
 export type Action = 
     GetCarsRequest |
     GetCarsRequestAction |
     GetCarsSuccessAction |
-    GetCarsErrorAction;
+    GetCarsErrorAction |
+    ClearCarsPagesAction |
+    EntitiesAction |
+    EntitiesResolveAction;
 
-export type ApiRequestParams = {
-    endpoint: string,
-    method?: string,
-    query?: mixed,
-    onSuccess?: (res: mixed) => void,
-    onError?: (res: mixed) => void
-};
 
-export type ApiRequest = {
-    type: typeof A.API_REQUEST,
-    types: Array<string>,
-} & ApiRequestParams;
