@@ -5,13 +5,18 @@ import {
     GET_CARS_REUQUEST,
     GET_CARS_SUCCESS,
     GET_CARS_ERROR,
-    CLEAR_CARS_PAGES
+    CLEAR_CARS_PAGES,
+    SET_CARS_FILTER,
+    SET_CARS_PAGE
 } from 'constants/actions';
 
 export const defaultState: CarState = {
     pages: {},
     error: null,
     loading: false,
+    color: null,
+    manufacturer: null,
+    sort: null,
     page: 1,
     totalPages: 0,
     totalItems: 0
@@ -40,6 +45,19 @@ const carReducer = (state:CarState = defaultState, action: Action):CarState => {
                 totalPages,
                 totalItems,
                 page,
+            }
+        case SET_CARS_PAGE: 
+            return {
+                ...state,
+                page: action.payload
+            }
+        case SET_CARS_FILTER:
+            const { color, manufacturer, sort } = action.payload
+            return {
+                ...state,
+                color,
+                manufacturer,
+                sort
             }
         case CLEAR_CARS_PAGES:
             return {

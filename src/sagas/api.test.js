@@ -1,6 +1,6 @@
 import { put, call } from '@redux-saga/core/effects';
 import { API_REQUEST } from 'constants/actions';
-import { apiSaga, makeRequest } from './api';
+import apiSaga, { makeRequest } from './api';
 
 let fetchMock = null
 

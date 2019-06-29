@@ -3,14 +3,14 @@
 import qs from 'query-string';
 import { put, call } from "@redux-saga/core/effects";
 import type { Saga } from 'redux-saga';
-import type { ApiRequest, ApiRequestParams } from 'types/api';
+import type { ApiRequestAction, ApiRequestParams } from 'types/api';
 
 export const makeRequest = ({
     endpoint,
     method,
     query,
     onSuccess
-}:ApiRequestParams) => {
+}:ApiRequestParams):Promise<*> => {
     if (query) {
         endpoint += `?${ qs.stringify(query) }`;
     }
@@ -20,14 +20,14 @@ export const makeRequest = ({
     .then(res => res.json())
 };
 
-export function* apiSaga({
+export default function* apiSaga({
     endpoint,
     method = 'GET',
     query,
     types,
     onSuccess,
     onError
-}:ApiRequest ):Saga<void> {
+}:ApiRequestAction ):Saga<void> {
     const [ REQUEST_ACTION, SUCCESS_ACTION, ERROR_ACTION ] = types;
 
     yield put({ type: REQUEST_ACTION });

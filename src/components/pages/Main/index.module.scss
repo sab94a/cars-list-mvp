@@ -1,0 +1,32 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    display: flex;
+    padding: $offset-lg;
+    padding-bottom: 0;
+}
+
+.aside {
+    width: $aside-width;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.searchResult {
+    font-size: $font-size-md;
+}
+
+.items {
+    margin: 0;
+    padding: 0;
+
+    li:first-of-type {
+        margin-top: 0;
+    }
+}
+
+.notFound {
+    padding: $offset-md 0;
+}

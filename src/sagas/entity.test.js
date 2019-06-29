@@ -1,7 +1,7 @@
 import { put, call } from '@redux-saga/core/effects';
 import { normalize } from 'normalizr';
 import { ENTITIES_RESOLVE } from 'constants/actions';
-import { entitySaga } from './entity';
+import entitySaga from './entity';
 
 const Action = {
     payload: {

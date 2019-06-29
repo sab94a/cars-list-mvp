@@ -1,7 +1,8 @@
 //@flow
 
 import * as A from 'constants/actions';
-import type { Car } from './models'
+import type { Car } from './models';
+import type { CarsRequestParams, CarsFilters } from './api';
 
 export type CollectionState<Item> = {
     items: Array<Item>,
@@ -20,7 +21,7 @@ export type PagesState<Ttem> = {
     error: ?string
 };
 
-export type CarState = PagesState<number>;
+export type CarState = PagesState<number> & CarsRequestParams;
 
 export type EntitiesState = {
     [string]: Car
@@ -40,8 +41,8 @@ export type ActionWithData<T, P> = {
     payload: P
 };
 
-export type GetCarsRequest       = ActionSimple<typeof A.GET_CARS>;
-export type GetCarsRequestAction = ActionSimple<typeof A.GET_CARS_REUQUEST>;
+export type GetCarsAction         = ActionWithData<typeof A.GET_CARS, CarsRequestParams>;
+export type GetCarsRequestAction  = ActionSimple<typeof A.GET_CARS_REUQUEST>;
 export type GetCarsSuccessPayload = {
     page: number,
     items: Array<number>,
@@ -50,6 +51,8 @@ export type GetCarsSuccessPayload = {
 }
 export type GetCarsSuccessAction = ActionWithData<typeof A.GET_CARS_SUCCESS, GetCarsSuccessPayload>;
 export type GetCarsErrorAction   = ActionWithData<typeof A.GET_CARS_ERROR, string>;
+export type SetCarsFilterAction  = ActionWithData<typeof A.SET_CARS_FILTER, CarsFilters>;
+export type SetCarsPageAction    = ActionWithData<typeof A.SET_CARS_PAGE, number>;
 export type ClearCarsPagesAction = ActionSimple<typeof A.CLEAR_CARS_PAGES>;
 
 export type EntitiesPayload = {
@@ -64,13 +67,18 @@ export type EntitiesResolvePayload = {
 };
 export type EntitiesResolveAction = ActionWithData<typeof A.ENTITIES_RESOLVE, EntitiesResolvePayload>;
 
+
+
 export type Action = 
-    GetCarsRequest |
+    GetCarsAction |
     GetCarsRequestAction |
     GetCarsSuccessAction |
     GetCarsErrorAction |
     ClearCarsPagesAction |
+    SetCarsFilterAction |
+    SetCarsPageAction |
     EntitiesAction |
     EntitiesResolveAction;
 
+export type Dispatch = (action: Action) => any;
 

@@ -1,0 +1,30 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    display: flex;
+    justify-content: center;
+    padding: $offset-md 0;
+}
+
+.content {
+    padding: $offset-md;
+}
+
+.link {
+    padding: $offset-md;
+    text-decoration: none;
+    color: $primary;
+    cursor: pointer;
+
+    &.disable {
+        color: $dark;
+
+        &:active, &:focus {
+            color: $dark;
+        }
+    }
+
+    &:active, &:focus {
+        color: $primary-pressed;
+    }
+}

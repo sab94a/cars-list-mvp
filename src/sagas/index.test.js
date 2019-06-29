@@ -1,7 +1,7 @@
 import { takeEvery } from '@redux-saga/core/effects';
 import { API_REQUEST, ENTITIES } from 'constants/actions';
 import { apiSaga } from './api';
-import { entitySaga } from './entity';
+import entitySaga from './entity';
 import RootSaga from './';
 
 describe('root Saga', () => {

@@ -9,13 +9,14 @@
 
 [options]
     module.name_mapper.extension='scss' -> 'empty/object' 
-    module.name_mapper='^actions\/\(.*\)$' -> '<PROJECT_ROOT>/src/actions/\1'
-    module.name_mapper='^constants\/\(.*\)$' -> '<PROJECT_ROOT>/src/constants/\1'
-    module.name_mapper='^types\/\(.*\)$' -> '<PROJECT_ROOT>/src/types/\1'
-    module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
-    module.name_mapper='^containers\/\(.*\)$' -> '<PROJECT_ROOT>/src/containers/\1'
-    module.name_mapper='^sagas\/\(.*\)$' -> '<PROJECT_ROOT>/src/sagas/\1'
-    module.name_mapper='^reducers\/\(.*\)$' -> '<PROJECT_ROOT>/src/reducers/\1'
-    module.name_mapper='^config\/\(.*\)$' -> '<PROJECT_ROOT>/src/config/\1'
-    module.name_mapper='^entities\/\(.*\)$' -> '<PROJECT_ROOT>/src/entities/\1'
+    module.name_mapper='^actions\(.*\)$' -> '<PROJECT_ROOT>/src/actions/\1'
+    module.name_mapper='^constants\(.*\)$' -> '<PROJECT_ROOT>/src/constants/\1'
+    module.name_mapper='^types\(.*\)$' -> '<PROJECT_ROOT>/src/types/\1'
+    module.name_mapper='^components\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+    module.name_mapper='^containers\(.*\)$' -> '<PROJECT_ROOT>/src/containers/\1'
+    module.name_mapper='^sagas\(.*\)$' -> '<PROJECT_ROOT>/src/sagas/\1'
+    module.name_mapper='^reducers\(.*\)$' -> '<PROJECT_ROOT>/src/reducers/\1'
+    module.name_mapper='^config\(.*\)$' -> '<PROJECT_ROOT>/src/config/\1'
+    module.name_mapper='^entities\(.*\)$' -> '<PROJECT_ROOT>/src/entities/\1'
+    module.name_mapper='^helpers\(.*\)$' -> '<PROJECT_ROOT>/src/helpers/\1'
 [strict]

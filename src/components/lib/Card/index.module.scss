@@ -1,0 +1,77 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    display: flex;
+    width: 100%;
+    padding: $offset-sm;
+    border: $border-width-sm solid $light;
+    margin-top:  $offset-md;
+
+    &.loading {
+        .image, .title, .description, .footer > * {
+            color:  $light;
+            background: $light;
+        }
+
+        .title {
+            height: 26px;
+        }
+
+        .description {
+            height: 14px;
+        }
+
+        .footer:after {
+            content: '';
+            @extend .footerLink;
+            width: 65px;
+            height: 14px;
+            color:  $light;
+            background: $light;
+        }
+    }
+}
+
+.image {
+    width: 90px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.content {
+    padding: 3px 0 3px $offset-lg;
+    min-width: 245px;
+}
+
+.title {
+    margin: 0;
+    margin-bottom: 2px;
+    padding-bottom: $offset-sm;
+    line-height: 1;
+    font-size: $font-size-md;
+    font-weight: bold;
+}
+
+.description {
+    margin: 0;
+}
+
+.footerLink {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: $border-width;
+    text-decoration: none;
+    color: $primary;
+    margin-top: $offset-sm;
+
+    &:hover {
+        color: $primary-pressed;
+    }
+}
+
+.footer {
+    & > * {
+        @extend .footerLink;
+    }
+}

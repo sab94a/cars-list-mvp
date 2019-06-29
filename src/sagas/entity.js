@@ -7,7 +7,7 @@ import { ENTITIES_RESOLVE } from 'constants/actions'
 
 import type { EntitiesAction } from 'types/store';
 
-export function* entitySaga({ payload: { schema, action, data } }:EntitiesAction):Saga<void> {
+export default function* entitySaga({ payload: { schema, action, data } }:EntitiesAction):Saga<void> {
     const { entities, result } = yield call(normalize, data, schema);
 
     yield put({ type: ENTITIES_RESOLVE, payload: entities })

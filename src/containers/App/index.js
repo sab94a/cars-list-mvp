@@ -17,7 +17,9 @@ type Props = {
     store: any
 };
 
-// configurate my own library link
+// configurate my own library's link ¯\_(ツ)_/¯
+// I decided to make Lib of component independent of React Router...
+
 LibLink.Component = ({ href, children, ...rest }) => (
     <Link to={ href } {...rest}>{ children }</Link>
 );

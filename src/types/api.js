@@ -11,17 +11,21 @@ export type ApiRequestParams = {
     onError?: (res: any) => mixed
 };
 
-export type ApiRequest = {
+export type ApiRequestAction = {
     type: typeof A.API_REQUEST,
     types: Array<string>,
 } & ApiRequestParams;
 
-export type CarsRequestParams = {
-    page: number,
-    manufacturer?: string,
-    color?: string,
-    sort?: 'asc' | 'des'
+export type SortFilter = 'asc' | 'des';
+
+export type CarsFilters = {
+    manufacturer: ?string,
+    color: ?string,
+    sort: ?SortFilter
 }
+export type CarsRequestParams = {
+    page: number
+} & CarsFilters;
 
 export type CarsResponse = {
     cars: Array<Car>,

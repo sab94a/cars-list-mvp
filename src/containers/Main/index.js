@@ -2,16 +2,35 @@
 
 import MainPage from 'components/pages/Main';
 import { connect } from 'react-redux';
-import { fetchCars } from 'actions/api';
-import type { ReduxState } from 'types/store';
+import { fetchCars } from 'actions';
 
-const mapStateToProps = ({ cars, entities }:ReduxState) => {
-    console.log(cars, entities)
-    return { cars }
+import type { ReduxState, Dispatch } from 'types/store';
+import type { CarsRequestParams } from 'types/api';
+import type { CarView } from 'types/views';
+import type { PagesNavigation } from 'types/routes';
+
+import { selectCars, selectCarsLoading, selectNavigation } from './selectors'
+
+export type StateProps = {
+    cars: Array<CarView>,
+    carsLoading: boolean,
+    navigation: PagesNavigation
 }
 
-const mapDispatchToProps = {
-    fetchCars
+export type dispatchProps = {
+    fetchData: (params: CarsRequestParams) => mixed
 }
+
+const mapStateToProps = (state: ReduxState):StateProps => ({
+    cars: selectCars(state),
+    carsLoading: selectCarsLoading(state),
+    navigation: selectNavigation(state)
+});
+
+const mapDispatchToProps = (dispatch: Dispatch):dispatchProps => {
+    return {
+        fetchData: (params: CarsRequestParams) => dispatch(fetchCars(params))
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
