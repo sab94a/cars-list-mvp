@@ -2,9 +2,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
 import Main from 'components/pages/Main';
+import * as selectors from './selectors';
 import MainContainer from './';
 
 jest.mock('components/pages/Main');
+jest.mock('./selectors');
 Main.mockImplementation(() => null);
 
 const storeFake = state => {
@@ -14,7 +16,7 @@ const storeFake = state => {
         dispatch: jest.fn(),
         getState: () => state,
     };
-};
+}; 
 
 describe('container <Main />', () => {
     let wrapper;
@@ -41,13 +43,16 @@ describe('container <Main />', () => {
 
     it('should map state to props', () => {
         const expectedPropKeys = [
-            'cars'
+            'cars',
+            'carsLoading',
+            'navigation'
         ]; 
 
         expect(Object.keys(component.props())).toEqual(expect.arrayContaining(expectedPropKeys));
     });
 
     afterAll(() => {
-        Main.mockRestore()
+        Main.mockRestore();
+        selectors.mockRestore();
     })
 });
