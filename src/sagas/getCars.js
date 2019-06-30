@@ -23,7 +23,6 @@ export default function* getCars({ payload: {
 
     if (isFilterChanged) {
         yield put(clearCarsPages());
-        yield put(setCarsPage(1));
         yield put(setCarsFilters({
             manufacturer,
             color,

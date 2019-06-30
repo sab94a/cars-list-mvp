@@ -57,11 +57,7 @@ describe('Get Cars Saga', () => {
             expect(saga.next(state).value).toEqual(put(clearCarsPages()))
         });
 
-        it('3) Set active page to first', () => {
-            expect(saga.next().value).toEqual(put(setCarsPage(1)))
-        });
-
-        it('4) Set filters', () => {
+        it('3) Set filters', () => {
             expect(saga.next().value).toEqual(put(setCarsFilters({
                 color,
                 manufacturer: undefined,
@@ -69,7 +65,7 @@ describe('Get Cars Saga', () => {
             })))
         });
 
-        it('5) Call Fetch Cars Action', () => {
+        it('4) Call Fetch Cars Action', () => {
             const next = saga.next().value;
             const expectedAction = fetchCars({ 
                 page,

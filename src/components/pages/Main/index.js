@@ -132,7 +132,7 @@ class Main extends React.PureComponent<Props> {
                         <div className={ styles.sort }>
                             <Select 
                                 label={ Main.SortLabel }
-                                defaultValue={ filters.sort }
+                                value={ filters.sort }
                                 options={ sortings }
                                 onChange={ this.onShorChange }
                             />

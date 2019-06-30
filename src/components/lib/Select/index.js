@@ -10,14 +10,13 @@ export default class Select extends React.PureComponent<SelectType> {
     static clearSelectValue = '/';
 
     static defaultProps = {
-        defaultValue: null,
+        value: null,
         placeholder: Select.placeholder,
         options: [],
         onChange: () => null
     };
 
     state = {
-        active: null,
         open: false
     }
 
@@ -33,29 +32,6 @@ export default class Select extends React.PureComponent<SelectType> {
     get items() {
         return [this.emptyOption, ...this.props.options]
     };
-
-    componentDidMount() {
-        const { defaultValue } = this.props;
-
-        if (defaultValue) {
-            this.setDefaultActive()
-        }
-    }
-
-    componentDidUpdate({ defaultValue, options }) {
-        if(
-            this.props.defaultValue !== defaultValue || 
-            this.props.options !== options
-        ) {
-            this.setDefaultActive()
-        }
-    }
-
-    setDefaultActive() {
-        this.setState({
-            active: this.findItem(this.props.defaultValue).title
-        })
-    }
 
     findItem = (value:string) => {
         for (let item of this.props.options) {
@@ -78,7 +54,6 @@ export default class Select extends React.PureComponent<SelectType> {
                 }
 
                 this.setState({
-                    active: value,
                     open: false
                 })
             }
@@ -98,9 +73,8 @@ export default class Select extends React.PureComponent<SelectType> {
     }
 
     render() {
-        const { label, className } = this.props;
-        const { open, active } = this.state;
-        const selectedClasses = cx(styles.selected, { [styles.open]: open})
+        const { label, className, value } = this.props;
+        const selectedClasses = cx(styles.selected, { [styles.open]: this.state.open})
 
         return (
             <div className={ cx(className, styles.root) } tabIndex="0" onBlur={ this.onBlur }>
@@ -108,9 +82,9 @@ export default class Select extends React.PureComponent<SelectType> {
                     <div className={ styles.label }>{ label }</div> 
                 )}
                 <div className={ selectedClasses } onClick={ this.togglePanel }>
-                    { this.findItem(active).title }
+                    { this.findItem(value).title }
                 </div>
-                { open && (
+                { this.state.open && (
                     <ul className={ styles.list}>
                         { this.items.map(({ value, title }: SelectItem) => (
                             <li 

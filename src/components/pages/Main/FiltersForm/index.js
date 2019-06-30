@@ -32,10 +32,10 @@ class FiltersForm extends React.PureComponent<Props> {
     static defaultProps = {
         onSubmit: () => null
     }
-
+    
     state = {
-        color: '',
-        manufacturer: ''
+        color: this.props.color,
+        manufacturer: this.props.manufacturer
     }
 
     handlers = {}
@@ -57,32 +57,38 @@ class FiltersForm extends React.PureComponent<Props> {
         this.props.onSubmit(this.state)
     };
 
-    componentDidMount() {
-        const { color = '', manufacturer = '' } = this.props;
+    componentDidUpdate(prevProps) {
+        // I know about this article https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state
+        // But I think that in this expamle it's probably only one solution
+        // Because we should have it's own state and we should update state, when props changed
+        // For example if props changed from Url Query params
 
-        this.setState({
-            color,
-            manufacturer
-        })
-    }
+        const { color, manufacturer } = this.props;
 
-    componentDidUpdate({ color, manufacturer }) {
-        if (this.props.color !== color) {
-            this.setState({ color })
-        }
-        if (this.props.manufacturer !== manufacturer) {
-            this.setState({ manufacturer })
-        }
+        let state = {};
+
+        if (color !== prevProps.color) {
+            state.color = color
+        };
+
+        if (manufacturer !== prevProps.manufacturer) {
+            state.manufacturer = manufacturer
+        };
+
+        if(Object.keys(state).length) {
+            this.setState(state)
+        };
     }
 
     render() {
-        const { colors, color, manufacturers, manufacturer } = this.props;
+        const { colors, manufacturers } = this.props;
+        const { color, manufacturer } = this.state;
 
         return (
             <form className={ styles.root } onSubmit={ this.onSubmit }>
                 <Select 
                     className={ styles.select } 
-                    defaultValue={ color }
+                    value={ color }
                     onChange={ this.bindChange(FiltersForm.Fields.Color) }
                     label={ FiltersForm.Titles.Color }
                     placeholder={ FiltersForm.Placeholders.Color }
@@ -90,7 +96,7 @@ class FiltersForm extends React.PureComponent<Props> {
                 />
                 <Select 
                     className={ styles.select } 
-                    defaultValue={ manufacturer }
+                    value={ manufacturer }
                     onChange={ this.bindChange(FiltersForm.Fields.Manufacturer) }
                     label={ FiltersForm.Titles.Manufacturer }
                     placeholder={ FiltersForm.Placeholders.Manufacturer }
