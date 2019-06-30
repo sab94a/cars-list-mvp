@@ -1,7 +1,7 @@
 //@flow
 
 import * as A from 'constants/actions';
-import type { Car } from './models';
+import type { Car, Manufacturer } from './models';
 import type { CarsRequestParams, CarsFilters } from './api';
 
 export type CollectionState<Item> = {
@@ -21,6 +21,8 @@ export type PagesState<Ttem> = {
     error: ?string
 };
 
+export type ColorState = CollectionState<string>;
+export type ManufacturerState = CollectionState<Manufacturer>;
 export type CarState = PagesState<number> & CarsRequestParams;
 
 export type EntitiesState = {
@@ -41,6 +43,7 @@ export type ActionWithData<T, P> = {
     payload: P
 };
 
+export type InitAction            = ActionSimple<typeof A.INIT>;
 export type GetCarsAction         = ActionWithData<typeof A.GET_CARS, CarsRequestParams>;
 export type GetCarsRequestAction  = ActionSimple<typeof A.GET_CARS_REUQUEST>;
 export type GetCarsSuccessPayload = {
@@ -67,9 +70,18 @@ export type EntitiesResolvePayload = {
 };
 export type EntitiesResolveAction = ActionWithData<typeof A.ENTITIES_RESOLVE, EntitiesResolvePayload>;
 
+export type ColorRequestAction = ActionSimple<typeof A.GET_COLORS_REQUEST>;
+export type ColorSuccessPayload = Array<string>;
+export type ColorSuccessAction = ActionWithData<typeof A.GET_COLORS_SUCCESS, ColorSuccessPayload>;
+export type ColorErrorAction = ActionWithData<typeof A.GET_COLORS_ERROR, string>;
 
+export type ManufacturerRequestAction = ActionSimple<typeof A.GET_MANUFACTURERS_REQUEST>;
+export type ManufacturerSuccessPayload = Array<Manufacturer>
+export type ManufacturerSuccessAction = ActionWithData<typeof A.GET_MANUFACTURERS_SUCCESS, ManufacturerSuccessPayload>;
+export type ManufacturerErrorAction = ActionWithData<typeof A.GET_MANUFACTURERS_ERROR, string>;
 
 export type Action = 
+    InitAction |
     GetCarsAction |
     GetCarsRequestAction |
     GetCarsSuccessAction |
@@ -77,6 +89,12 @@ export type Action =
     ClearCarsPagesAction |
     SetCarsFilterAction |
     SetCarsPageAction |
+    ColorRequestAction |
+    ColorSuccessAction |
+    ColorErrorAction |
+    ManufacturerRequestAction |
+    ManufacturerSuccessAction |
+    ManufacturerErrorAction |
     EntitiesAction |
     EntitiesResolveAction;
 

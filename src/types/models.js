@@ -20,3 +20,12 @@ export type Car = {
     color: Color,
     pictureUrl: string
 }
+
+export type Model = {
+    name: string
+}
+
+export type Manufacturer = {
+    name: string,
+    models: Array<Model>
+}

@@ -1,10 +1,17 @@
 // @flow
 
-import { 
+import {
+    INIT,
     GET_CARS, 
     GET_CARS_REUQUEST,
     GET_CARS_SUCCESS,
     GET_CARS_ERROR,
+    GET_COLORS_REQUEST,
+    GET_COLORS_SUCCESS,
+    GET_COLORS_ERROR,
+    GET_MANUFACTURERS_REQUEST,
+    GET_MANUFACTURERS_SUCCESS,
+    GET_MANUFACTURERS_ERROR,
     CLEAR_CARS_PAGES, 
     SET_CARS_FILTER, 
     SET_CARS_PAGE,
@@ -12,7 +19,7 @@ import {
     API_REQUEST
 } from 'constants/actions';
 
-import { API_CARS } from 'constants/api';
+import { API_CARS, API_COLORS, API_MANUFACTURERS } from 'constants/api';
 
 import { Car } from '../entities';
 
@@ -24,6 +31,7 @@ import type {
 } from 'types/api';
 
 import type { 
+    InitAction,
     GetCarsAction, 
     SetCarsFilterAction, 
     SetCarsPageAction, 
@@ -76,4 +84,20 @@ export const fetchCars = ({
             totalItems: totalCarsCount
         }
     })
+});
+
+export const init = ():InitAction => ({
+    type: INIT
+})
+
+export const fetchColors = ():ApiRequestAction => ({
+    endpoint: API_COLORS,
+    type: API_REQUEST,
+    types: [GET_COLORS_REQUEST, GET_COLORS_SUCCESS, GET_COLORS_ERROR],
+});
+
+export const fetchManufacturers = ():ApiRequestAction => ({
+    endpoint: API_MANUFACTURERS,
+    type: API_REQUEST,
+    types: [GET_MANUFACTURERS_REQUEST, GET_MANUFACTURERS_SUCCESS, GET_MANUFACTURERS_ERROR],
 });
