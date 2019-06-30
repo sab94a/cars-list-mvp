@@ -15,7 +15,8 @@ import FiltersForm from 'components/pages/Main/FiltersForm';
 import styles from './index.module.scss';
 
 export type Props = {
-    fetchData: (params: mixed) => void,
+    init: (params: mixed) => void,
+    update: (params: mixed) => void,
     cars: Array<CarView>,
     carsLoading: boolean,
     navigation: PagesNavigation,
@@ -24,27 +25,27 @@ export type Props = {
 
 class Main extends React.PureComponent<Props> {
     componentDidMount() {
-        this.fetchDataFromQuery()
+        this.props.init(this.getParams())
     };
 
     componentDidUpdate({ location: { search: prevSearch } }: Props) {
         const { location: { search } } = this.props;
 
         if (search !== prevSearch) {
-            this.fetchDataFromQuery()
+            this.props.update(this.getParams())
         }
     }
 
-    fetchDataFromQuery() {
+    getParams() {
         const { location: { search } } = this.props;
         const { page, manufacturer, color, sort } = qs.parse(search);
 
-        this.props.fetchData({
+        return {
             page: page ? Number.parseInt(page) : 1, 
             manufacturer,
             color,
             sort
-        });
+        };
     }
 
     placeholder:Array<boolean> = new Array(10).fill(false);

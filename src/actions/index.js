@@ -86,8 +86,9 @@ export const fetchCars = ({
     })
 });
 
-export const init = ():InitAction => ({
-    type: INIT
+export const init = (params: CarsRequestParams):InitAction => ({
+    type: INIT,
+    payload: params
 })
 
 export const fetchColors = ():ApiRequestAction => ({

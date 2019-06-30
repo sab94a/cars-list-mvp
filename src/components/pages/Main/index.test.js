@@ -35,11 +35,11 @@ describe('<Main /> page component', () => {
     };
 
     beforeEach(() => {
-        fetchData = jest.fn();
+        update = jest.fn();
     })
 
     it('Should render correctly', () => {
-        create({ fetchData, cars, navigation, location, carsLoading: false });
+        create({ update, cars, navigation, location, carsLoading: false });
 
         expect(toJson(component)).toMatchSnapshot();
     });
@@ -66,7 +66,7 @@ describe('<Main /> page component', () => {
     });
 
     it('If loading, should render loading placeholder', () => {
-        create({ fetchData, navigation, location, carsLoading: true });
+        create({ update, navigation, location, carsLoading: true });
 
         const $cards = component.find(Card);
 
@@ -86,13 +86,13 @@ describe('<Main /> page component', () => {
     });
 
     it('Shouldn\'t render paginator if pages are not passed', () => {
-        create({ fetchData, navigation: { totalPages: 0 }, location, carsLoading: true });
+        create({ update, navigation: { totalPages: 0 }, location, carsLoading: true });
 
         expect(component.find(Paginator)).toHaveLength(0);
     });
 
     it('Should render Not Found Node insted of cars correctly', () => {
-        create({ fetchData, navigation: {}, cars: [], location, carsLoading: false });
+        create({ update, navigation: {}, cars: [], location, carsLoading: false });
 
         expect(component.find('.notFound')).toHaveLength(1);
     })
