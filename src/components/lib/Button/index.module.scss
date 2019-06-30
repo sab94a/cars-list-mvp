@@ -1,0 +1,16 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    border: 0;
+    background: $primary;
+    color: #fff;
+    width: $button-width;
+    font-size: $font-size-sm;
+    padding: $offset-sm;
+    border-radius: 2px;
+    cursor: pointer;
+
+    &:hover, &:focus {
+        background: $primary-pressed;
+    }
+}

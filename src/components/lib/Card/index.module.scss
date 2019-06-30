@@ -62,12 +62,7 @@
     vertical-align: middle;
     margin-right: $border-width;
     text-decoration: none;
-    color: $primary;
     margin-top: $offset-sm;
-
-    &:hover {
-        color: $primary-pressed;
-    }
 }
 
 .footer {

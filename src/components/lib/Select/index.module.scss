@@ -1,0 +1,71 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    position: relative;
+    font-size: $font-size-sm;
+    outline: none;
+    width: $button-width * 2;
+    text-align: left;
+}
+
+.list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0;
+    margin: $offset-sm 0 0 0;
+    min-width: 100%;
+    border-radius: $border-width-sm;
+    border: $border-width-sm solid $light;
+    z-index: 1;
+}
+
+.selected {
+    position: relative;
+    border: $border-width-sm solid $light;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: $offset-sm;
+        top: 50%;
+        margin-top: -$offset-sm / 2;
+        width: 0;
+        border: 7px solid transparent;	
+        border-top: 10px solid $light;
+    }
+
+    &.open:after {
+        border: 7px solid transparent;	
+        margin-top: -13px;
+        border-bottom: 10px solid $light;
+    }
+}
+
+.selected, .item {
+    display: block;
+    padding: $offset-sm;
+    border-radius: $border-width-sm;
+    background: #fff;
+    user-select: none;
+    cursor: pointer;
+}
+
+.label {
+    font-size: $font-size-sx;
+    margin-bottom: $offset-sm;
+}
+
+.item {
+    border-bottom: $border-width-sm solid $light;
+
+    &:last-of-type {
+        border-bottom: 0;
+    }
+
+    &:hover, &:focus {
+        background: $primary;
+        color: #fff;
+    }
+}

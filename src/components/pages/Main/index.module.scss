@@ -7,13 +7,23 @@
 }
 
 .aside {
-    width: $aside-width;
+    padding-right: $offset-lg;
 }
 
 .content {
     flex-grow: 1;
 }
 
+.searchHeader {
+    display: flex;
+    padding-bottom: $offset-lg;
+    justify-content: space-between;
+
+    h2 {
+        margin: 0 0 $offset-md 0;
+        line-height: 1;
+    }
+}
 .searchResult {
     font-size: $font-size-md;
 }

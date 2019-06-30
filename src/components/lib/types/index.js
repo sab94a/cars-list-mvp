@@ -1,7 +1,5 @@
 //@flow 
 
-import type { AbstractComponent } from 'react';
-
 export type Path = string;
 
 export type Title = string;
@@ -18,4 +16,19 @@ export type Card = {
     loading?: boolean,
     footer?: React$Node,
     elemType?: string
+}
+
+export type SelectItem = {
+    value: string,
+    title: string
+}
+
+export type Select = {
+    defaultValue: string,
+    placeholder: ?string,
+    options: Array<React$Node>
+}
+
+export type Button = {
+    children: React$Node
 }

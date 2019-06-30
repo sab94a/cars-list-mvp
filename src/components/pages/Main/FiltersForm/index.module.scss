@@ -1,0 +1,15 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    padding: $offset-lg;
+    border: $border-width-sm solid $light;
+    text-align: right;
+}
+
+.select {
+    margin-bottom: $offset-md;
+
+    &:last-of-type {
+        margin-bottom: $offset-lg;
+    }
+}

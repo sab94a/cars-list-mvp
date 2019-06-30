@@ -1,0 +1,10 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    color: $primary;
+
+    &:hover, &:focus {
+        text-decoration: underline;
+        color: $primary-pressed;    
+    }
+}

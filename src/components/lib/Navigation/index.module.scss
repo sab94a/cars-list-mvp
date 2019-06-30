@@ -12,4 +12,10 @@
     font-size: $font-size-sm;
     padding: 0 $offset-lg;
     text-decoration: none;
+    color: $dark;
+    
+    &:hover, &:focus {
+        color: inherit;
+        text-decoration: none;
+    }
 }

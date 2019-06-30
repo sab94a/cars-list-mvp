@@ -8,7 +8,9 @@ import type { CarView } from 'types/views';
 
 import Card from 'components/lib/Card';
 import Link from 'components/lib/Link';
+import Select from 'components/lib/Select';
 import Paginator from 'components/lib/Paginator';
+import FiltersForm from 'components/pages/Main/FiltersForm';
 
 import styles from './index.module.scss';
 
@@ -64,11 +66,19 @@ class Main extends React.PureComponent<Props> {
         return (
             <div className={ styles.root }>
                 <aside className={ styles.aside }>
-                    Heading Asside
+                    <FiltersForm />
                 </aside>
                 <div className={ styles.content }>
-                    <div className={ styles.searchResult}>
-                        { `Showing ${ shownItems } of ${ totalItems } results` }
+                    <div className={ styles.searchHeader}>
+                        <div className={ styles.searchInfo}>
+                            <h2>Available cars</h2>
+                            <div className={ styles.searchResult}>
+                                { `Showing ${ shownItems } of ${ totalItems } results` }
+                            </div>
+                        </div>
+                        <div className={ styles.sort }>
+                            <Select label="Sort by" options={[{ title: 'white', value: 1 }, { title: 'white 2', value: 2 }]} />
+                        </div>
                     </div>
                     { !isNotFound && (
                         <ul className={ styles.items }>

@@ -13,18 +13,13 @@
 .link {
     padding: $offset-md;
     text-decoration: none;
-    color: $primary;
     cursor: pointer;
 
     &.disable {
         color: $dark;
 
         &:active, &:focus {
-            color: $dark;
+            color: inherit;
         }
-    }
-
-    &:active, &:focus {
-        color: $primary-pressed;
     }
 }
