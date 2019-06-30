@@ -1,0 +1,735 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Main /> page component Should render correctly 1`] = `
+<Main
+  cars={
+    Array [
+      Object {
+        "description": "description_0",
+        "image": "image_0.png",
+        "link": "?cars/0/",
+        "stockNumber": 1,
+        "title": "title 0",
+      },
+      Object {
+        "description": "description_1",
+        "image": "image_1.png",
+        "link": "?cars/1/",
+        "stockNumber": 1,
+        "title": "title 1",
+      },
+      Object {
+        "description": "description_2",
+        "image": "image_2.png",
+        "link": "?cars/2/",
+        "stockNumber": 1,
+        "title": "title 2",
+      },
+      Object {
+        "description": "description_3",
+        "image": "image_3.png",
+        "link": "?cars/3/",
+        "stockNumber": 1,
+        "title": "title 3",
+      },
+      Object {
+        "description": "description_4",
+        "image": "image_4.png",
+        "link": "?cars/4/",
+        "stockNumber": 1,
+        "title": "title 4",
+      },
+      Object {
+        "description": "description_5",
+        "image": "image_5.png",
+        "link": "?cars/5/",
+        "stockNumber": 1,
+        "title": "title 5",
+      },
+      Object {
+        "description": "description_6",
+        "image": "image_6.png",
+        "link": "?cars/6/",
+        "stockNumber": 1,
+        "title": "title 6",
+      },
+      Object {
+        "description": "description_7",
+        "image": "image_7.png",
+        "link": "?cars/7/",
+        "stockNumber": 1,
+        "title": "title 7",
+      },
+      Object {
+        "description": "description_8",
+        "image": "image_8.png",
+        "link": "?cars/8/",
+        "stockNumber": 1,
+        "title": "title 8",
+      },
+      Object {
+        "description": "description_9",
+        "image": "image_9.png",
+        "link": "?cars/9/",
+        "stockNumber": 1,
+        "title": "title 9",
+      },
+    ]
+  }
+  carsLoading={false}
+  fetchData={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "color": undefined,
+            "manufacturer": undefined,
+            "page": 1,
+            "sort": undefined,
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  location={
+    Object {
+      "search": "",
+    }
+  }
+  navigation={
+    Object {
+      "page": 10,
+      "shownItems": 10,
+      "totalItems": 1000,
+      "totalPages": 100,
+    }
+  }
+>
+  <div
+    className="root"
+  >
+    <aside
+      className="aside"
+    >
+      Heading Asside
+    </aside>
+    <div
+      className="content"
+    >
+      <div
+        className="searchResult"
+      >
+        Showing 10 of 1000 results
+      </div>
+      <ul
+        className="items"
+      >
+        <Memo(Card)
+          description="description_0"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/0/"
+            >
+              View details
+            </Link>
+          }
+          image="image_0.png"
+          key="0"
+          title="title 0"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_0.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 0
+              </h3>
+              <p
+                className="description"
+              >
+                description_0
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/0/"
+                >
+                  <a
+                    href="?cars/0/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_1"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/1/"
+            >
+              View details
+            </Link>
+          }
+          image="image_1.png"
+          key="1"
+          title="title 1"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_1.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 1
+              </h3>
+              <p
+                className="description"
+              >
+                description_1
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/1/"
+                >
+                  <a
+                    href="?cars/1/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_2"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/2/"
+            >
+              View details
+            </Link>
+          }
+          image="image_2.png"
+          key="2"
+          title="title 2"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_2.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 2
+              </h3>
+              <p
+                className="description"
+              >
+                description_2
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/2/"
+                >
+                  <a
+                    href="?cars/2/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_3"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/3/"
+            >
+              View details
+            </Link>
+          }
+          image="image_3.png"
+          key="3"
+          title="title 3"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_3.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 3
+              </h3>
+              <p
+                className="description"
+              >
+                description_3
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/3/"
+                >
+                  <a
+                    href="?cars/3/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_4"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/4/"
+            >
+              View details
+            </Link>
+          }
+          image="image_4.png"
+          key="4"
+          title="title 4"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_4.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 4
+              </h3>
+              <p
+                className="description"
+              >
+                description_4
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/4/"
+                >
+                  <a
+                    href="?cars/4/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_5"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/5/"
+            >
+              View details
+            </Link>
+          }
+          image="image_5.png"
+          key="5"
+          title="title 5"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_5.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 5
+              </h3>
+              <p
+                className="description"
+              >
+                description_5
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/5/"
+                >
+                  <a
+                    href="?cars/5/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_6"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/6/"
+            >
+              View details
+            </Link>
+          }
+          image="image_6.png"
+          key="6"
+          title="title 6"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_6.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 6
+              </h3>
+              <p
+                className="description"
+              >
+                description_6
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/6/"
+                >
+                  <a
+                    href="?cars/6/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_7"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/7/"
+            >
+              View details
+            </Link>
+          }
+          image="image_7.png"
+          key="7"
+          title="title 7"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_7.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 7
+              </h3>
+              <p
+                className="description"
+              >
+                description_7
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/7/"
+                >
+                  <a
+                    href="?cars/7/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_8"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/8/"
+            >
+              View details
+            </Link>
+          }
+          image="image_8.png"
+          key="8"
+          title="title 8"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_8.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 8
+              </h3>
+              <p
+                className="description"
+              >
+                description_8
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/8/"
+                >
+                  <a
+                    href="?cars/8/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+        <Memo(Card)
+          description="description_9"
+          elemType="li"
+          footer={
+            <Link
+              href="?cars/9/"
+            >
+              View details
+            </Link>
+          }
+          image="image_9.png"
+          key="9"
+          title="title 9"
+        >
+          <li
+            className="root"
+          >
+            <div
+              className="image"
+              style={
+                Object {
+                  "backgroundImage": "url(image_9.png)",
+                }
+              }
+            />
+            <div
+              className="content"
+            >
+              <h3
+                className="title"
+              >
+                title 9
+              </h3>
+              <p
+                className="description"
+              >
+                description_9
+              </p>
+              <div
+                className="footer"
+              >
+                <Link
+                  href="?cars/9/"
+                >
+                  <a
+                    href="?cars/9/"
+                  >
+                    View details
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        </Memo(Card)>
+      </ul>
+      <Paginator
+        active={10}
+        total={100}
+      >
+        <div
+          className="root"
+        >
+          <Link
+            className="link"
+            href="?page=1"
+          >
+            <a
+              className="link"
+              href="?page=1"
+            >
+              First
+            </a>
+          </Link>
+          <Link
+            className="link"
+            href="?page=9"
+          >
+            <a
+              className="link"
+              href="?page=9"
+            >
+              Previous
+            </a>
+          </Link>
+          <div
+            className="content"
+          >
+            Page 10 of 100
+          </div>
+          <Link
+            className="link"
+            href="?page=11"
+          >
+            <a
+              className="link"
+              href="?page=11"
+            >
+              Next
+            </a>
+          </Link>
+          <Link
+            className="link"
+            href="?page=100"
+          >
+            <a
+              className="link"
+              href="?page=100"
+            >
+              Last
+            </a>
+          </Link>
+        </div>
+      </Paginator>
+    </div>
+  </div>
+</Main>
+`;
