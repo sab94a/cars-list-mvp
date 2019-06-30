@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Card /> Should render correctly default view 1`] = `
+<Memo(Card)
+  description="description"
+  footer={
+    <b>
+      Footer
+    </b>
+  }
+  image="./image"
+  title="title"
+>
+  <div
+    className="root"
+  >
+    <div
+      className="image"
+      style={
+        Object {
+          "backgroundImage": "url(./image)",
+        }
+      }
+    />
+    <div
+      className="content"
+    >
+      <h3
+        className="title"
+      >
+        title
+      </h3>
+      <p
+        className="description"
+      >
+        description
+      </p>
+      <div
+        className="footer"
+      >
+        <b>
+          Footer
+        </b>
+      </div>
+    </div>
+  </div>
+</Memo(Card)>
+`;
+
+exports[`<Card /> Should render correctly loading state 1`] = `
+<Memo(Card)
+  loading={true}
+>
+  <div
+    className="root loading"
+  >
+    <div
+      className="image"
+      style={
+        Object {
+          "backgroundImage": null,
+        }
+      }
+    />
+    <div
+      className="content"
+    >
+      <h3
+        className="title"
+      />
+      <p
+        className="description"
+      />
+      <div
+        className="footer"
+      />
+    </div>
+  </div>
+</Memo(Card)>
+`;

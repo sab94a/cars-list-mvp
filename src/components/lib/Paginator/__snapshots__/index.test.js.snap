@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Paginator /> Should render correctly 1`] = `
+<Paginator
+  active={2}
+  total={10}
+>
+  <div
+    className="root"
+  >
+    <Link
+      className="link"
+      href="?page=1"
+    >
+      <a
+        className="link"
+        href="?page=1"
+      >
+        First
+      </a>
+    </Link>
+    <Link
+      className="link"
+      href="?page=1"
+    >
+      <a
+        className="link"
+        href="?page=1"
+      >
+        Previous
+      </a>
+    </Link>
+    <div
+      className="content"
+    >
+      Page 2 of 10
+    </div>
+    <Link
+      className="link"
+      href="?page=3"
+    >
+      <a
+        className="link"
+        href="?page=3"
+      >
+        Next
+      </a>
+    </Link>
+    <Link
+      className="link"
+      href="?page=10"
+    >
+      <a
+        className="link"
+        href="?page=10"
+      >
+        Last
+      </a>
+    </Link>
+  </div>
+</Paginator>
+`;
