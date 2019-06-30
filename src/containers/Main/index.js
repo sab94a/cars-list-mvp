@@ -6,7 +6,7 @@ import { getCars, init } from 'actions';
 import { SORTINGS } from 'constants/api';
 
 import type { ReduxState, Dispatch } from 'types/store';
-import type { CarsRequestParams } from 'types/api';
+import type { CarsRequestParams, CarsFilters } from 'types/api';
 import type { CarView } from 'types/views';
 import type { PagesNavigation } from 'types/routes';
 
@@ -15,7 +15,8 @@ import {
     selectCarsLoading, 
     selectNavigation,
     selectColors,
-    selectManufacturers
+    selectManufacturers,
+    selectFilters
 } from './selectors'
 
 export type StateProps = {
@@ -24,7 +25,8 @@ export type StateProps = {
     navigation: PagesNavigation,
     color: Array<string>,
     manufacturers: Array<string>,
-    sortings: Array<string>
+    sortings: Array<string>,
+    filters: CarsFilters
 }
 
 export type dispatchProps = {
@@ -43,6 +45,7 @@ const mapStateToProps = (state: ReduxState):StateProps => ({
     navigation: selectNavigation(state),
     colors: selectColors(state),
     manufacturers: selectManufacturers(state),
+    filters: selectFilters(state),
     sortings
 });
 

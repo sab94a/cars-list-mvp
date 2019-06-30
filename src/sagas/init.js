@@ -1,7 +1,7 @@
 //@flow 
 
 import { put, select } from "@redux-saga/core/effects";
-import { fetchColors, fetchManufacturers, fetchCars } from 'actions';
+import { fetchColors, fetchManufacturers, getCars } from 'actions';
 
 export default function* initSaga({
     payload: {
@@ -26,7 +26,7 @@ export default function* initSaga({
     }
 
     if(!hasCars) {
-        yield put(fetchCars({
+        yield put(getCars({
             page,
             sort,
             color,

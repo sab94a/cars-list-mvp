@@ -6,6 +6,8 @@ import Button from 'components/lib/Button';
 import styles from './index.module.scss';
 
 export type Props = {
+    color: string,
+    manufacturer: string,
     colors: Array<string>,
     manufacturers: Array<string>
 }
@@ -51,17 +53,36 @@ class FiltersForm extends React.PureComponent<Props> {
 
     onSubmit = e => {
         e.preventDefault();
-        
+
         this.props.onSubmit(this.state)
     };
 
+    componentDidMount() {
+        const { color = '', manufacturer = '' } = this.props;
+
+        this.setState({
+            color,
+            manufacturer
+        })
+    }
+
+    componentDidUpdate({ color, manufacturer }) {
+        if (this.props.color !== color) {
+            this.setState({ color })
+        }
+        if (this.props.manufacturer !== manufacturer) {
+            this.setState({ manufacturer })
+        }
+    }
+
     render() {
-        const { colors, manufacturers } = this.props;
+        const { colors, color, manufacturers, manufacturer } = this.props;
 
         return (
             <form className={ styles.root } onSubmit={ this.onSubmit }>
                 <Select 
                     className={ styles.select } 
+                    defaultValue={ color }
                     onChange={ this.bindChange(FiltersForm.Fields.Color) }
                     label={ FiltersForm.Titles.Color }
                     placeholder={ FiltersForm.Placeholders.Color }
@@ -69,6 +90,7 @@ class FiltersForm extends React.PureComponent<Props> {
                 />
                 <Select 
                     className={ styles.select } 
+                    defaultValue={ manufacturer }
                     onChange={ this.bindChange(FiltersForm.Fields.Manufacturer) }
                     label={ FiltersForm.Titles.Manufacturer }
                     placeholder={ FiltersForm.Placeholders.Manufacturer }

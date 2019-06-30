@@ -5,6 +5,7 @@ import qs from 'query-string';
 
 import type { PagesNavigation } from 'types/routes';
 import type { CarView } from 'types/views';
+import type { CarsFilters } from 'types/api';
 
 import Card from 'components/lib/Card';
 import Link from 'components/lib/Link';
@@ -23,11 +24,14 @@ export type Props = {
     manufacturers: Array<string>,
     carsLoading: boolean,
     navigation: PagesNavigation,
+    filters: CarsFilters,
     location: Location,
     history: History
 }
 
 class Main extends React.PureComponent<Props> {
+    static SortLabel = 'Sort by'
+
     componentDidMount() {
         this.props.init(this.getParams())
     };
@@ -100,7 +104,8 @@ class Main extends React.PureComponent<Props> {
                 totalPages, 
                 page 
             },
-            carsLoading
+            carsLoading,
+            filters
         } = this.props;
 
         const isNotFound = !carsLoading && !cars.length;
@@ -109,7 +114,9 @@ class Main extends React.PureComponent<Props> {
             <div className={ styles.root }>
                 <aside className={ styles.aside }>
                     <FiltersForm 
+                        color={ filters.color }
                         colors={ colors }
+                        manufacturer={ filters.manufacturer }
                         manufacturers={ manufacturers }
                         onSubmit={ this.onFilterFormSubmit }
                     />
@@ -124,7 +131,8 @@ class Main extends React.PureComponent<Props> {
                         </div>
                         <div className={ styles.sort }>
                             <Select 
-                                label="Sort by"
+                                label={ Main.SortLabel }
+                                defaultValue={ filters.sort }
                                 options={ sortings }
                                 onChange={ this.onShorChange }
                             />

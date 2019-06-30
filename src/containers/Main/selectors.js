@@ -72,3 +72,8 @@ export const selectManufacturers = createSelector(
         value: name
     }))
 );
+
+export const selectFilters = createSelector(
+    selectCarState,
+    ({ sort, color, manufacturer } ) => ({ sort, color, manufacturer })
+)

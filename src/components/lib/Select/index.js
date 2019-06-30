@@ -38,10 +38,23 @@ export default class Select extends React.PureComponent<SelectType> {
         const { defaultValue } = this.props;
 
         if (defaultValue) {
-            this.setState({
-                active: this.findItem(defaultValue).title
-            })
+            this.setDefaultActive()
         }
+    }
+
+    componentDidUpdate({ defaultValue, options }) {
+        if(
+            this.props.defaultValue !== defaultValue || 
+            this.props.options !== options
+        ) {
+            this.setDefaultActive()
+        }
+    }
+
+    setDefaultActive() {
+        this.setState({
+            active: this.findItem(this.props.defaultValue).title
+        })
     }
 
     findItem = (value:string) => {
