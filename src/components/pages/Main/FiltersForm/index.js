@@ -5,32 +5,76 @@ import Select from 'components/lib/Select';
 import Button from 'components/lib/Button';
 import styles from './index.module.scss';
 
-class FiltersForm extends React.PureComponent {
+export type Props = {
+    colors: Array<string>,
+    manufacturers: Array<string>
+}
+
+class FiltersForm extends React.PureComponent<Props> {
     static Titles = {
         Color: 'Color',
         Manufacturer: 'Manufacturer',
         Submit: 'Filter'
     }
+
     static Placeholders = {
         Color: 'All car colors',
         Manufacturer: 'All manufacturers'
     }
+
+    static Fields = {
+        Color: 'color',
+        Manufacturer: 'manufacturer'
+    }
+    
+    static defaultProps = {
+        onSubmit: () => null
+    }
+
+    state = {
+        color: '',
+        manufacturer: ''
+    }
+
+    handlers = {}
+
+    bindChange(field) {
+        if(!this.handlers[field]) {
+            this.handlers[field] = value => {
+                this.setState({
+                    [field]: value
+                })
+            }
+        }
+        return this.handlers[field];
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+        
+        this.props.onSubmit(this.state)
+    };
+
     render() {
+        const { colors, manufacturers } = this.props;
+
         return (
-            <form className={ styles.root }>
+            <form className={ styles.root } onSubmit={ this.onSubmit }>
                 <Select 
                     className={ styles.select } 
+                    onChange={ this.bindChange(FiltersForm.Fields.Color) }
                     label={ FiltersForm.Titles.Color }
                     placeholder={ FiltersForm.Placeholders.Color }
-                    options={[{ title: 'white', value: 1 }, { title: 'white 2', value: 2 }]} 
+                    options={ colors } 
                 />
                 <Select 
                     className={ styles.select } 
+                    onChange={ this.bindChange(FiltersForm.Fields.Manufacturer) }
                     label={ FiltersForm.Titles.Manufacturer }
                     placeholder={ FiltersForm.Placeholders.Manufacturer }
-                    options={[{ title: 'white', value: 1 }, { title: 'white 2', value: 2 }]} 
+                    options={ manufacturers } 
                 />
-                <Button>{ FiltersForm.Titles.Submit }</Button>
+                <Button type='submit'>{ FiltersForm.Titles.Submit }</Button>
             </form>
         )
     }

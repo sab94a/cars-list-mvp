@@ -58,7 +58,7 @@ export default class Select extends React.PureComponent<SelectType> {
             this.handlers[value] = (event: SyntheticEvent<*>) => {
                 event.preventDefault();
 
-                if (value !== Select.clearSelectValue) {
+                if (value === Select.clearSelectValue) {
                     this.props.onChange(false)
                 } else {
                     this.props.onChange(value)

@@ -95,10 +95,12 @@ export const fetchColors = ():ApiRequestAction => ({
     endpoint: API_COLORS,
     type: API_REQUEST,
     types: [GET_COLORS_REQUEST, GET_COLORS_SUCCESS, GET_COLORS_ERROR],
+    onSuccess: ({ colors }) => colors
 });
 
 export const fetchManufacturers = ():ApiRequestAction => ({
     endpoint: API_MANUFACTURERS,
     type: API_REQUEST,
     types: [GET_MANUFACTURERS_REQUEST, GET_MANUFACTURERS_SUCCESS, GET_MANUFACTURERS_ERROR],
+    onSuccess: ({ manufacturers }) => manufacturers
 });

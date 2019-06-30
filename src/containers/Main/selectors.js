@@ -4,7 +4,17 @@ import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
 import { Car } from '../../entities';
 
-import type { ReduxState, CarState, EntitiesState } from 'types/store';
+import type { 
+    ReduxState, 
+    CarState, 
+    EntitiesState, 
+    ColorState, 
+    ManufacturerState, 
+    Manufacturer 
+} from 'types/store';
+
+import { CARS_PER_PAGE } from 'constants/api'
+
 import type { PagesNavigation } from 'types/routes';
 import type { CarView } from 'types/views';
 
@@ -12,6 +22,8 @@ import { getCarInfo } from 'helpers';
 
 const selectCarState = ({ cars }: ReduxState):CarState => cars;
 const selectEntitiesState = ({ entities }: ReduxState):EntitiesState => entities;
+const selectColorState = ({ colors }:ReduxState):ColorState => colors;
+const selectManufacturerState = ({ manufacturers }:ReduxState):ManufacturerState => manufacturers
 
 const selectCarsIds = createSelector(
     selectCarState,
@@ -27,9 +39,8 @@ export const selectNavigation = createSelector(
     selectCarState,
     selectCarsIds,
     ({ totalPages, totalItems, page }:CarState, currents:Array<number>):PagesNavigation => {
-        const carsPerPage = totalPages ? Math.floor(totalItems/totalPages) : 0;
-        const shownItems = (page - 1) * carsPerPage + currents.length;
-        
+        const shownItems = (page - 1) * CARS_PER_PAGE + currents.length;
+
         return {
             shownItems,
             totalItems,
@@ -44,4 +55,20 @@ export const selectCars = createSelector(
     selectEntitiesState,
     (ids:Array<number>, entities:EntitiesState):Array<CarView> =>
         denormalize(ids, [Car], entities).map(getCarInfo)
+);
+
+export const selectColors = createSelector(
+    selectColorState,
+    ({items = []}:ColorState):Array<string> => items.map(color => ({
+        title: color,
+        value: color
+    }))
+);
+
+export const selectManufacturers = createSelector(
+    selectManufacturerState,
+    ({ items = []}:ManufacturerState):Array<string> => items.map(({ name }:Manufacturer) => ({
+        title: name,
+        value: name
+    }))
 );

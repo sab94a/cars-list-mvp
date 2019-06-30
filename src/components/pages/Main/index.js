@@ -18,9 +18,13 @@ export type Props = {
     init: (params: mixed) => void,
     update: (params: mixed) => void,
     cars: Array<CarView>,
+    colors: Array<string>,
+    sortings: Array<string>,
+    manufacturers: Array<string>,
     carsLoading: boolean,
     navigation: PagesNavigation,
-    location: Location 
+    location: Location,
+    history: History
 }
 
 class Main extends React.PureComponent<Props> {
@@ -48,11 +52,48 @@ class Main extends React.PureComponent<Props> {
         };
     }
 
+    onFilterChange = (params) => {
+        const { location: { pathname }, history } = this.props
+
+        let query = {}
+
+        for(let key in params) {
+            if(params[key]) {
+                query[key] = params[key]
+            }
+        }
+
+        query.page = 1
+
+        history.push({
+            pathname,
+            search: `?${qs.stringify(query)}`
+        })
+    }
+
+    onFilterFormSubmit = ({ manufacturer, color }) => {
+        this.onFilterChange({
+            ...this.getParams(),
+            manufacturer,
+            color
+        })
+    }
+
+    onShorChange = (sort) => {
+        this.onFilterChange({
+            ...this.getParams(),
+            sort
+        })
+    }
+
     placeholder:Array<boolean> = new Array(10).fill(false);
 
     render() {
         const { 
-            cars, 
+            cars,
+            colors,
+            sortings,
+            manufacturers,
             navigation: { 
                 shownItems, 
                 totalItems, 
@@ -67,7 +108,11 @@ class Main extends React.PureComponent<Props> {
         return (
             <div className={ styles.root }>
                 <aside className={ styles.aside }>
-                    <FiltersForm />
+                    <FiltersForm 
+                        colors={ colors }
+                        manufacturers={ manufacturers }
+                        onSubmit={ this.onFilterFormSubmit }
+                    />
                 </aside>
                 <div className={ styles.content }>
                     <div className={ styles.searchHeader}>
@@ -78,7 +123,11 @@ class Main extends React.PureComponent<Props> {
                             </div>
                         </div>
                         <div className={ styles.sort }>
-                            <Select label="Sort by" options={[{ title: 'white', value: 1 }, { title: 'white 2', value: 2 }]} />
+                            <Select 
+                                label="Sort by"
+                                options={ sortings }
+                                onChange={ this.onShorChange }
+                            />
                         </div>
                     </div>
                     { !isNotFound && (
