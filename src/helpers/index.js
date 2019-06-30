@@ -24,9 +24,5 @@ export const getCarInfo = ({
     title: `${ manufacturerName } ${ modelName }`,
     image: pictureUrl,
     link: generatePath(RoutesMap.Car.path, { id: stockNumber }),
-    description: `Stock # ${ stockNumber } - 
-        ${ number } ${unit.toUpperCase()} - 
-        ${ fuelType } -
-        ${ uppercaseFirstLetter(color) }
-    `
+    description: `Stock # ${ stockNumber } - ${ number } ${unit.toUpperCase()} - ${ fuelType } - ${ uppercaseFirstLetter(color) }`
 });
