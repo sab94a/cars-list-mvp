@@ -3,11 +3,11 @@
 import { put, select, takeEvery } from "@redux-saga/core/effects";
 
 import { GET_FAVOURITE, ADD_FAVOURITE, REMOVE_FAVOURITE } from 'constants/actions';
-import { FAVOURITE_KEY } from 'constants/api';
+import { FAVOURITE_KEY, SORTINGS } from 'constants/api';
 import { updateFavourite } from 'actions'
 
 import type { Saga } from 'redux-saga';
-import type { RemoveFavouriteAction, AddFavouriteAction } from 'types/store';
+import type { GetFavouriteAction, RemoveFavouriteAction, AddFavouriteAction } from 'types/store';
 
 const getLS = () =>
     JSON.parse(localStorage.getItem(FAVOURITE_KEY) || '{}');
@@ -15,20 +15,42 @@ const getLS = () =>
 const setLS = (map) =>
     localStorage.setItem(FAVOURITE_KEY, JSON.stringify(map))
 
-function* getFavourite():Saga<void> {
+function* getFavourite({
+    payload = {}
+}:GetFavouriteAction):Saga<void> {
+    const { favourites: { sort } } = yield select();
     const LsFavourites = getLS();
-    
+
     let cars = [];
 
     for(let id in LsFavourites) {
         cars.push(LsFavourites[id]);
     };
 
-    yield put(updateFavourite(cars));
+    if(payload.color) {
+        cars = cars.filter(item => item.color === payload.color)
+    }
+
+    if(payload.manufacturer) {
+        cars = cars.filter(item => item.manufacturerName === payload.manufacturer)
+    }
+
+    if(payload.sort) {
+        if (sort === SORTINGS[0]) {
+            cars = cars.sort((a, b) => b.mileage.number - a.mileage.number)
+        } else {
+            cars = cars.sort((a, b) => a.mileage.number - b.mileage.number)
+        }
+    }
+
+    yield put(updateFavourite({ 
+        items: cars,
+        ...payload
+    }));
 }
 
 function* addFavourite({ payload }:AddFavouriteAction):Saga<void> {
-    const { entities: { cars }, favourites } = yield select();
+    const { entities: { cars }, favourites: { items } } = yield select();
 
     const LsFavourites = getLS();
     const item = cars[payload];
@@ -37,19 +59,19 @@ function* addFavourite({ payload }:AddFavouriteAction):Saga<void> {
 
     setLS(LsFavourites);
 
-    yield put(updateFavourite([item, ...favourites]));
+    yield put(updateFavourite({ items: [item, ...items] }));
 }
 
 function* removeFavourite({ payload }:RemoveFavouriteAction):Saga<void> {
-    const { favourites } = yield select();
+    const { favourites: { items } } = yield select();
     const LsFavourites = getLS();
-    const cars = favourites.filter(item => payload !== item.stockNumber);
+    const cars = items.filter(item => payload !== item.stockNumber);
 
     delete LsFavourites[payload];
 
     setLS(LsFavourites);
 
-    yield put(updateFavourite(cars));
+    yield put(updateFavourite({ items: cars }));
 }
 
 export default function* favourite():Saga<void> {

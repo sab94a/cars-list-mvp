@@ -27,7 +27,7 @@ const selectEntitiesState = ({ entities }: ReduxState):EntitiesState => entities
 const selectColorState = ({ colors }:ReduxState):ColorState => colors;
 const selectManufacturerState = ({ manufacturers }:ReduxState):ManufacturerState => manufacturers;
 const selectItemCarState = ({ car }: ReduxState):CarItemState => car;
-const selectFavouriteState = ({ favourites }: ReduxState):FavouriteState => favourites || [];
+const selectFavouriteState = ({ favourites }: ReduxState):FavouriteState => favourites;
 const selectCarIdFromProps = (state: ReduxState, { match: { params } }:RouterProps):number => +params.id;
 
 const selectCarsIds = createSelector(
@@ -59,8 +59,8 @@ export const selectCars = createSelector(
     selectCarsIds,
     selectEntitiesState,
     selectFavouriteState,
-    (ids:Array<number>, entities:EntitiesState, favourites:FavouriteState):Array<CarView> =>
-        denormalize(ids, [Car], entities).map(item => getCarInfo(item, favourites))
+    (ids:Array<number>, entities:EntitiesState, { items }:FavouriteState):Array<CarView> =>
+        denormalize(ids, [Car], entities).map(item => getCarInfo(item, items))
 );
 
 export const selectColors = createSelector(
@@ -89,9 +89,9 @@ export const selectCar = createSelector(
     selectCarIdFromProps,
     selectEntitiesState,
     selectFavouriteState,
-    ({ item }:CarItemState, propsId:number, entities:EntitiesState, favourites:FavouriteState):?CarView => {
+    ({ item }:CarItemState, propsId:number, entities:EntitiesState, { items }:FavouriteState):?CarView => {
         if (item && item === propsId) {
-            return getCarInfo(denormalize(item, Car, entities), favourites)
+            return getCarInfo(denormalize(item, Car, entities), items)
         }
         return null
     }
@@ -102,3 +102,14 @@ export const selectCarError = createSelector(
     selectItemCarState,
     ({ error }:CarItemState):string => error
 );
+
+export const selectFavourites = createSelector(
+    selectFavouriteState,
+    ({ items }:FavouriteState) =>
+        items.map(item => getCarInfo(item))
+)
+
+export const selectFavouriteFilters = createSelector(
+    selectFavouriteState,
+    ({ sort, color, manufacturer } ) => ({ sort, color, manufacturer })
+)

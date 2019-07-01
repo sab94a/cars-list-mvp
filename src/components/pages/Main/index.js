@@ -24,7 +24,7 @@ export type Props = {
     sortings: Array<SelectView>,
     manufacturers: Array<SelectView>,
     carsLoading: boolean,
-    navigation: PagesNavigation,
+    navigation: ?PagesNavigation,
     filters: CarsFilters,
     location: Location,
     history: History
@@ -130,17 +130,14 @@ class Main extends React.PureComponent<Props> {
             colors,
             sortings,
             manufacturers,
-            navigation: { 
-                shownItems, 
-                totalItems, 
-                totalPages, 
-                page 
-            },
+            navigation,
             carsLoading,
             filters
         } = this.props;
 
         const isNotFound = !carsLoading && !cars.length;
+        const shownItems = navigation ? navigation.shownItems : cars.length;
+        const totalItems = navigation ? navigation.totalItems : cars.length;
 
         return (
             <div className={ styles.root }>
@@ -193,10 +190,10 @@ class Main extends React.PureComponent<Props> {
                         <div className={ styles.notFound }>There is no avalible cars for your search.</div>
                     ) }
 
-                    { !!totalPages && (
+                    { !!navigation && (
                         <Paginator 
-                            active={ page } 
-                            total={ totalPages } 
+                            active={ navigation.page } 
+                            total={ navigation.totalPages } 
                         />
                     ) }
                 </div>

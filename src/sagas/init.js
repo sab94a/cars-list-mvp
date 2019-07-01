@@ -1,11 +1,11 @@
 //@flow 
 
-import { put, select, takeEvery } from "@redux-saga/core/effects";
+import { put, select, takeEvery, fork } from "@redux-saga/core/effects";
 import { fetchColors, fetchManufacturers, getCars, getCar, getFavourite } from 'actions';
-import { INIT_CAR, INIT_CARS } from 'constants/actions';
+import { INIT_CAR, INIT_CARS, INIT_FAVOURITIES } from 'constants/actions';
 
 import type { Saga } from 'redux-saga';
-import type { InitCarsAction, InitCarAction } from 'types/store';
+import type { InitFavouriteAction, InitCarsAction, InitCarAction } from 'types/store';
 
 export function* initCarsSaga({
     payload: {
@@ -15,20 +15,12 @@ export function* initCarsSaga({
         sort
     }
 }:InitCarsAction):Saga<void> {
-    const { cars, colors, manufacturers, favourites } = yield select();
+    const { cars, favourites } = yield select();
 
     const hasCars  = !!cars.pages[cars.page]
-    const hasColor = !!colors.items.length;
-    const hasManufacturer  = !!manufacturers.items.length;
     const hasFavourites = !!favourites.length;
 
-    if(!hasColor) {
-        yield put(fetchColors())
-    }
-
-    if(!hasManufacturer) {
-        yield put(fetchManufacturers())
-    }
+    yield fork(initFilters)
 
     if(!hasFavourites) {
         yield put(getFavourite())
@@ -43,6 +35,43 @@ export function* initCarsSaga({
         }))
     }
 };
+
+export function* initFavourites({
+    payload: {
+        manufacturer,
+        color,
+        sort
+    } 
+}: InitFavouriteAction) {
+    const { favourites } = yield select();
+
+    const hasFavourites = !!favourites.length;
+
+    yield fork(initFilters)
+
+    if(!hasFavourites) {
+        yield put(getFavourite({
+            manufacturer,
+            color,
+            sort
+        }))
+    }
+}
+
+export function* initFilters() {
+    const { colors, manufacturers } = yield select();
+
+    const hasColor = !!colors.items.length;
+    const hasManufacturer  = !!manufacturers.items.length;
+
+    if(!hasColor) {
+        yield put(fetchColors())
+    }
+
+    if(!hasManufacturer) {
+        yield put(fetchManufacturers())
+    }
+}
 
 export function* initCarSaga({
     payload
@@ -59,4 +88,5 @@ export function* initCarSaga({
 export default function* initSage() {
     yield takeEvery(INIT_CARS, initCarsSaga)
     yield takeEvery(INIT_CAR, initCarSaga)
+    yield takeEvery(INIT_FAVOURITIES, initFavourites)
 }

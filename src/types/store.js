@@ -27,11 +27,14 @@ export type PagesState<Ttem> = {
     error: ?string
 };
 
+export type FavouriteState = {
+    items: [Car]
+} && CarsFilters;
+
 export type ColorState = CollectionState<string>;
 export type ManufacturerState = CollectionState<Manufacturer>;
 export type CarState = PagesState<number> & CarsRequestParams;
 export type CarItemState = ItemState<number>;
-export type FavouriteState = [Car];
 
 export type EntitiesState = {
     [string]: Car
@@ -52,6 +55,7 @@ export type ActionWithData<T, P> = {
 };
 
 export type InitCarsAction        = ActionWithData<typeof A.INIT_CARS, CarsRequestParams>;
+export type InitFavouriteAction   = ActionWithData<typeof A.INIT_FAVOURITIES, CarsRequestParams>;
 export type InitCarAction         = ActionWithData<typeof A.INIT_CAR, number>;
 export type GetCarsAction         = ActionWithData<typeof A.GET_CARS, CarsRequestParams>;
 export type GetCarsRequestAction  = ActionSimple<typeof A.GET_CARS_REQUEST>;
@@ -94,7 +98,7 @@ export type ManufacturerSuccessPayload = Array<Manufacturer>
 export type ManufacturerSuccessAction = ActionWithData<typeof A.GET_MANUFACTURERS_SUCCESS, ManufacturerSuccessPayload>;
 export type ManufacturerErrorAction = ActionWithData<typeof A.GET_MANUFACTURERS_ERROR, string>;
 
-export type GetFavouriteAction = ActionSimple<typeof A.GET_FAVOURITE>;
+export type GetFavouriteAction = ActionWithData<typeof A.GET_FAVOURITE, CarsRequestParams>;
 export type RemoveFavouriteAction = ActionWithData<typeof A.ADD_FAVOURITE, number>;
 export type AddFavouriteAction = ActionWithData<typeof A.REMOVE_FAVOURITE, number>;
 export type UpdateFavouriteAction = ActionWithData<typeof A.UPDATE_FAVOURITE, Array<Car>>;

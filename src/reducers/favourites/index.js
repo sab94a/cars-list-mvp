@@ -3,10 +3,20 @@
 import type { FavouriteState, Action } from 'types/store';
 import { UPDATE_FAVOURITE } from 'constants/actions';
 
-const favouritesReducer = (state:FavouriteState = [], action: Action):ColorState => {
+const defaultState = {
+    items: [],
+    color: null,
+    manufacturer: null,
+    sort: null,
+}
+
+const favouritesReducer = (state:FavouriteState = defaultState, action: Action):ColorState => {
     switch(action.type) {
         case UPDATE_FAVOURITE:
-            return action.payload
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state;
     }

@@ -2,6 +2,7 @@
 
 export const INIT_CARS: 'INIT_CARS' = 'INIT_CARS';
 export const INIT_CAR: 'INIT_CAR' = 'INIT_CAR';
+export const INIT_FAVOURITIES: 'INIT_FAVOURITIES' = 'INIT_FAVOURITIES';
 export const API_REQUEST: 'API_REQUEST' = 'API_REQUEST';
 
 export const ENTITIES: 'ENTITIES' = 'ENTITIES';

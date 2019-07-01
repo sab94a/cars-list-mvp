@@ -25,5 +25,5 @@ export const getCarInfo = ({
     image: pictureUrl,
     link: generatePath(RoutesMap.Car.path, { id: stockNumber }),
     description: `Stock # ${ stockNumber } - ${ number } ${unit.toUpperCase()} - ${ fuelType } - ${ uppercaseFirstLetter(color) }`,
-    isFavourite: favourites.some(item => item.stockNumber === stockNumber)
+    isFavourite: favourites ? favourites.some(item => item.stockNumber === stockNumber) : true
 });

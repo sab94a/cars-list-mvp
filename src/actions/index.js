@@ -1,6 +1,7 @@
 // @flow
 
 import {
+    INIT_FAVOURITIES,
     INIT_CARS,
     INIT_CAR,
     GET_CARS, 
@@ -91,6 +92,11 @@ export const initCar = (number: number):InitCarAction => ({
     payload: number
 });
 
+export const initFavourities = (params: CarsFilters):InitCarAction => ({
+    type: INIT_FAVOURITIES,
+    payload: params
+});
+
 export const fetchCars = ({
     page,
     manufacturer,
@@ -143,8 +149,9 @@ export const fetchManufacturers = ():ApiRequestAction => ({
     onSuccess: ({ manufacturers }) => manufacturers
 });
 
-export const getFavourite = ():GetFavouriteAction => ({
-    type: GET_FAVOURITE
+export const getFavourite = (payload: ?CarsRequestParams):GetFavouriteAction => ({
+    type: GET_FAVOURITE,
+    payload
 });
 
 export const addFavourite = (id: number):AddFavouriteAction => ({
