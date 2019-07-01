@@ -15,11 +15,12 @@ export function* initCarsSaga({
         sort
     }
 }:InitCarsAction):Saga<void> {
-    const { cars, colors, manufacturers } = yield select();
+    const { cars, colors, manufacturers, favourites } = yield select();
 
     const hasCars  = !!cars.pages[cars.page]
     const hasColor = !!colors.items.length;
     const hasManufacturer  = !!manufacturers.items.length;
+    const hasFavourites = !!favourites.length;
 
     if(!hasColor) {
         yield put(fetchColors())
@@ -27,6 +28,10 @@ export function* initCarsSaga({
 
     if(!hasManufacturer) {
         yield put(fetchManufacturers())
+    }
+
+    if(!hasFavourites) {
+        yield put(getFavourite())
     }
 
     if(!hasCars) {

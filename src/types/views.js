@@ -5,5 +5,11 @@ export type CarView = {
     title: string,
     image: string,
     link: string,
-    description: string
+    description: string,
+    isFavourite: boolean
+};
+
+export type SelectView = {
+    title: string,
+    value: string
 };

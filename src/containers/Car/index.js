@@ -7,7 +7,7 @@ import type { CarView } from 'types/views';
 import type { ReduxState, Dispatch } from 'types/store';
 import type { RouterProps } from 'types/route';
 
-import { selectCar, selectCarError, selectFavouriteStatus } from 'selectors';
+import { selectCar, selectCarError } from 'selectors';
 import { initCar, addFavourite, removeFavourite } from 'actions';
 
 export type StateProps = {
@@ -17,14 +17,14 @@ export type StateProps = {
 };
 
 export type dispatchProps = {
-    update: (params: CarsRequestParams) => mixed,
-    initCars: (params: CarsRequestParams) => mixed
+    init: () => mixed,
+    addFavourite: () => mixed,
+    removeFavourite: () => mixed
 };
 
 const mapStateToProps = (state:ReduxState, props: RouterProps) => ({
     car: selectCar(state, props),
     error: selectCarError(state),
-    isFavourite: selectFavouriteStatus(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch, { match: { params } }:RouterProps):dispatchProps => ({

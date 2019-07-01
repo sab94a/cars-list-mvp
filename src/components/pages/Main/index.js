@@ -4,7 +4,7 @@ import React from 'react';
 import qs from 'query-string';
 
 import type { PagesNavigation } from 'types/routes';
-import type { CarView } from 'types/views';
+import type { CarView, SelectView } from 'types/views';
 import type { CarsFilters } from 'types/api';
 
 import Card from 'components/lib/Card';
@@ -18,10 +18,11 @@ import styles from './index.module.scss';
 export type Props = {
     init: (params: mixed) => void,
     update: (params: mixed) => void,
+    removeFavourite: (id: number) => void,
     cars: Array<CarView>,
-    colors: Array<string>,
-    sortings: Array<string>,
-    manufacturers: Array<string>,
+    colors: Array<SelectView>,
+    sortings: Array<SelectView>,
+    manufacturers: Array<SelectView>,
     carsLoading: boolean,
     navigation: PagesNavigation,
     filters: CarsFilters,
@@ -30,7 +31,9 @@ export type Props = {
 }
 
 class Main extends React.PureComponent<Props> {
-    static SortLabel = 'Sort by'
+    static SortLabel = 'Sort by';
+
+    handlers = {};
 
     componentDidMount() {
         this.props.init(this.getParams())
@@ -88,6 +91,35 @@ class Main extends React.PureComponent<Props> {
             ...this.getParams(),
             sort
         })
+    };
+
+    bindRemoveClick = (carId: number) => {
+        const { removeFavourite } = this.props;
+
+        if(!this.handlers[carId]) {
+            this.handlers[carId] = e => {
+                e.preventDefault()
+
+                removeFavourite(carId)
+            }
+        }
+        return this.handlers[carId];
+    }
+
+    renderCarFooter(car: CarView) {
+        return (
+             <>
+                <Link href={ car.link }>View details</Link>
+                { car.isFavourite && (
+                    <>
+                        <span className={ styles.separator } />
+                        <Link href="#" onClick={ this.bindRemoveClick(car.stockNumber) }>
+                            Remove from favourites
+                        </Link>
+                    </>
+                ) }
+            </>
+        )
     }
 
     placeholder:Array<boolean> = new Array(10).fill(false);
@@ -147,9 +179,7 @@ class Main extends React.PureComponent<Props> {
                                     title={ item.title }
                                     image={ item.image }
                                     description={ item.description }
-                                    footer={
-                                        <Link href={ item.link }>View details</Link>
-                                    }
+                                    footer={this.renderCarFooter(item)}
                                 />
                             ))}
 

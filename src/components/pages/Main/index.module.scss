@@ -38,6 +38,15 @@
     }
 }
 
+.separator {
+    padding: 0 $offset-sm;
+    
+    &:after {
+        content: '|';
+        vertical-align: top;
+    }
+}
+
 .notFound {
     padding: $offset-md 0;
 }

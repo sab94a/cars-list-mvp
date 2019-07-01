@@ -9,10 +9,9 @@ import styles from './index.module.scss';
 
 type Props = {
     car: CarView,
-    init: (id: number) => void,
-    addFavourite: (id: number) => void,
-    removeFavourite: (id: number) => void,
-    isFavourite: boolean,
+    init: () => void,
+    addFavourite: () => void,
+    removeFavourite: () => void,
     error: ?string,
     history: History
 }
@@ -39,7 +38,7 @@ class Car extends React.PureComponent<Props> {
     }
 
     render() {
-        const { isFavourite, addFavourite, removeFavourite } = this.props;
+        const { addFavourite, removeFavourite } = this.props;
         const car = this.item;
         const imageClass = cx(styles.image, { 
             [styles.hasImage]: car.image 
@@ -64,7 +63,7 @@ class Car extends React.PureComponent<Props> {
                         </p>
                     </div>
                     <aside className={ styles.aside}>
-                        { isFavourite ? (
+                        { car.isFavourite ? (
                             <>
                                 <p>
                                     This car is actually in your collection. You can remove it. 

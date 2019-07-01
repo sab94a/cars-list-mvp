@@ -2,12 +2,12 @@
 
 import MainPage from 'components/pages/Main';
 import { connect } from 'react-redux';
-import { getCars, initCars } from 'actions';
+import { getCars, initCars, removeFavourite } from 'actions';
 import { SORTINGS } from 'constants/api';
 
 import type { ReduxState, Dispatch } from 'types/store';
 import type { CarsRequestParams, CarsFilters } from 'types/api';
-import type { CarView } from 'types/views';
+import type { CarView, SelectView } from 'types/views';
 import type { PagesNavigation } from 'types/routes';
 
 import { 
@@ -23,15 +23,16 @@ export type StateProps = {
     cars: Array<CarView>,
     carsLoading: boolean,
     navigation: PagesNavigation,
-    color: Array<string>,
-    manufacturers: Array<string>,
-    sortings: Array<string>,
+    color: Array<SelectView>,
+    manufacturers: Array<SelectView>,
+    sortings: Array<SelectView>,
     filters: CarsFilters
 }
 
 export type dispatchProps = {
     update: (params: CarsRequestParams) => mixed,
-    initCars: (params: CarsRequestParams) => mixed
+    initCars: (params: CarsRequestParams) => mixed,
+    removeFavourite: (id: number) => mixed
 }
 
 const sortings = SORTINGS.map(type => ({
@@ -52,7 +53,8 @@ const mapStateToProps = (state: ReduxState):StateProps => ({
 const mapDispatchToProps = (dispatch: Dispatch):dispatchProps => {
     return {
         init: (params: CarsRequestParams) => dispatch(initCars(params)),
-        update: (params: CarsRequestParams) => dispatch(getCars(params))
+        update: (params: CarsRequestParams) => dispatch(getCars(params)),
+        removeFavourite: (id) => dispatch(removeFavourite(id))
     };
 };
 

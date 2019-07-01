@@ -18,7 +18,7 @@ import type {
 import { CARS_PER_PAGE } from 'constants/api'
 
 import type { PagesNavigation, RouterProps } from 'types/routes';
-import type { CarView } from 'types/views';
+import type { CarView, SelectView } from 'types/views';
 
 import { getCarInfo } from 'helpers';
 
@@ -27,8 +27,8 @@ const selectEntitiesState = ({ entities }: ReduxState):EntitiesState => entities
 const selectColorState = ({ colors }:ReduxState):ColorState => colors;
 const selectManufacturerState = ({ manufacturers }:ReduxState):ManufacturerState => manufacturers;
 const selectItemCarState = ({ car }: ReduxState):CarItemState => car;
-const selectFavouriteState = ({ favourites }: ReduxState):FavouriteState => favourites;
-const selectCarIdFromProps = (state: ReduxState, { match: { params } }:RouterProps):number => params.id;
+const selectFavouriteState = ({ favourites }: ReduxState):FavouriteState => favourites || [];
+const selectCarIdFromProps = (state: ReduxState, { match: { params } }:RouterProps):number => +params.id;
 
 const selectCarsIds = createSelector(
     selectCarState,
@@ -58,13 +58,14 @@ export const selectNavigation = createSelector(
 export const selectCars = createSelector(
     selectCarsIds,
     selectEntitiesState,
-    (ids:Array<number>, entities:EntitiesState):Array<CarView> =>
-        denormalize(ids, [Car], entities).map(getCarInfo)
+    selectFavouriteState,
+    (ids:Array<number>, entities:EntitiesState, favourites:FavouriteState):Array<CarView> =>
+        denormalize(ids, [Car], entities).map(item => getCarInfo(item, favourites))
 );
 
 export const selectColors = createSelector(
     selectColorState,
-    ({items = []}:ColorState):Array<string> => items.map(color => ({
+    ({items = []}:ColorState):Array<SelectView> => items.map(color => ({
         title: color,
         value: color
     }))
@@ -72,7 +73,7 @@ export const selectColors = createSelector(
 
 export const selectManufacturers = createSelector(
     selectManufacturerState,
-    ({ items = []}:ManufacturerState):Array<string> => items.map(({ name }:Manufacturer) => ({
+    ({ items = []}:ManufacturerState):Array<SelectView> => items.map(({ name }:Manufacturer) => ({
         title: name,
         value: name
     }))
@@ -87,22 +88,17 @@ export const selectCar = createSelector(
     selectItemCarState,
     selectCarIdFromProps,
     selectEntitiesState,
-    ({ item }:CarItemState, propsId, entities:EntitiesState) => 
-        item && item === +propsId ? getCarInfo(denormalize(item, Car, entities)) : null
+    selectFavouriteState,
+    ({ item }:CarItemState, propsId:number, entities:EntitiesState, favourites:FavouriteState):?CarView => {
+        if (item && item === propsId) {
+            return getCarInfo(denormalize(item, Car, entities), favourites)
+        }
+        return null
+    }
+        
 )
 
 export const selectCarError = createSelector(
     selectItemCarState,
     ({ error }:CarItemState):string => error
-);
-
-export const selectFavouriteStatus = createSelector(
-    selectFavouriteState,
-    selectItemCarState,
-    (favourites:FavouriteState, { item }:CarItemState):boolean => {
-        if(item && favourites.length) {
-            return favourites.some(car => car.stockNumber === +item)
-        }
-        return false
-    }
 );

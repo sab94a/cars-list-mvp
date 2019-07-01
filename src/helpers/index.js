@@ -19,10 +19,11 @@ export const getCarInfo = ({
     fuelType,
     pictureUrl,
     color
-}:Car):CarView => ({
+}:Car, favourites:Array<Car>):CarView => ({
     stockNumber,
     title: `${ manufacturerName } ${ modelName }`,
     image: pictureUrl,
     link: generatePath(RoutesMap.Car.path, { id: stockNumber }),
-    description: `Stock # ${ stockNumber } - ${ number } ${unit.toUpperCase()} - ${ fuelType } - ${ uppercaseFirstLetter(color) }`
+    description: `Stock # ${ stockNumber } - ${ number } ${unit.toUpperCase()} - ${ fuelType } - ${ uppercaseFirstLetter(color) }`,
+    isFavourite: favourites.some(item => item.stockNumber === stockNumber)
 });
