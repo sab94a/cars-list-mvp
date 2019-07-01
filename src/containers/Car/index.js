@@ -8,7 +8,7 @@ import type { ReduxState } from 'types/store';
 import type { RouterProps } from 'types/route';
 
 import { selectCar, selectCarError } from 'selectors';
-import { fetchCar } from 'actions';
+import { getCar } from 'actions';
 
 export type StateProps = {
     car: ?CarView,
@@ -21,7 +21,7 @@ const mapStateToProps = (state:ReduxState, props: RouterProps) => ({
 });
 
 const mapDispatchToProps = {
-    fetchCar
+    getCar
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarPage);

@@ -12,7 +12,7 @@ import styles from './index.module.scss';
 
 type Props = {
     car: CarView,
-    fetchCar: number => void,
+    getCar: number => void,
     match: Match,
     error: ?string,
     history: History
@@ -20,10 +20,10 @@ type Props = {
 
 class Car extends React.PureComponent<Props> {
     componentDidMount() {
-        const { fetchCar, car, match: { params } } = this.props;
+        const { getCar, car, match: { params } } = this.props;
 
         if(!car) {
-            fetchCar(params.id)
+            getCar(params.id)
         }
     }
 
