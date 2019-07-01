@@ -1,5 +1,5 @@
 import Main from 'containers/Main';
-import Car from 'components/pages/Car';
+import Car from 'containers/Car';
 import NotFound from 'components/pages/NotFound';
 
 export const RoutesMap = {

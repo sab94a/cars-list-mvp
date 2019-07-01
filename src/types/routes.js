@@ -12,3 +12,15 @@ export type PagesNavigation = {
     totalPages: number,
     page: number
 }
+
+export type Match = {
+    params: {
+        [string]: string
+    }
+}
+
+export type RouterProps = {
+    match: Match,
+    location: Location,
+    history: History
+}

@@ -2,7 +2,7 @@
 
 import type { CarState, Action } from 'types/store';
 import {
-    GET_CARS_REUQUEST,
+    GET_CARS_REQUEST,
     GET_CARS_SUCCESS,
     GET_CARS_ERROR,
     CLEAR_CARS_PAGES,
@@ -24,7 +24,7 @@ export const defaultState: CarState = {
 
 const carReducer = (state:CarState = defaultState, action: Action):CarState => {
     switch(action.type) {
-        case GET_CARS_REUQUEST:
+        case GET_CARS_REQUEST:
             return {
                 ...state,
                 loading: true,

@@ -3,9 +3,13 @@
 import {
     INIT,
     GET_CARS, 
-    GET_CARS_REUQUEST,
+    GET_CARS_REQUEST,
     GET_CARS_SUCCESS,
     GET_CARS_ERROR,
+    GET_CAR,
+    GET_CAR_REQUEST,
+    GET_CAR_SUCCESS,
+    GET_CAR_ERROR,
     GET_COLORS_REQUEST,
     GET_COLORS_SUCCESS,
     GET_COLORS_ERROR,
@@ -27,11 +31,13 @@ import type {
     CarsRequestParams, 
     CarsFilters, 
     CarsResponse,
+    CarResponse,
     ApiRequestAction
 } from 'types/api';
 
 import type { 
     InitAction,
+    GetCarAction,
     GetCarsAction, 
     SetCarsFilterAction, 
     SetCarsPageAction, 
@@ -42,6 +48,11 @@ import type {
 
 export const getCars = (payload: CarsRequestParams):GetCarsAction => ({
     type: GET_CARS,
+    payload
+});
+
+export const getCar = (payload: number):GetCarAction => ({
+    type: GET_CAR,
     payload
 });
 
@@ -59,6 +70,11 @@ export const clearCarsPages = ():ClearCarsPagesAction => ({
     type: CLEAR_CARS_PAGES
 });
 
+export const init = (params: CarsRequestParams):InitAction => ({
+    type: INIT,
+    payload: params
+})
+
 export const fetchCars = ({
     page,
     manufacturer,
@@ -67,7 +83,7 @@ export const fetchCars = ({
 }:CarsRequestParams):ApiRequestAction => ({
     endpoint: API_CARS,
     type: API_REQUEST,
-    types: [GET_CARS_REUQUEST, ENTITIES, GET_CARS_ERROR],
+    types: [GET_CARS_REQUEST, ENTITIES, GET_CARS_ERROR],
     query: {
         page, 
         manufacturer, 
@@ -86,10 +102,16 @@ export const fetchCars = ({
     })
 });
 
-export const init = (params: CarsRequestParams):InitAction => ({
-    type: INIT,
-    payload: params
-})
+export const fetchCar = (id:number):ApiRequestAction => ({
+    endpoint: `${API_CARS}/${id}`,
+    type: API_REQUEST,
+    types: [GET_CAR_REQUEST, ENTITIES, GET_CAR_ERROR],
+    onSuccess: ({ car }: CarResponse):EntitiesPayload => ({
+        schema: Car,
+        action: GET_CAR_SUCCESS,
+        data: car
+    })
+});
 
 export const fetchColors = ():ApiRequestAction => ({
     endpoint: API_COLORS,

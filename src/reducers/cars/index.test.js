@@ -1,5 +1,5 @@
 import {
-    GET_CARS_REUQUEST,
+    GET_CARS_REQUEST,
     GET_CARS_SUCCESS,
     CLEAR_CARS_PAGES,
     GET_CARS_ERROR
@@ -14,8 +14,8 @@ describe('CarReducer => ', () => {
         expect(state).toEqual(defaultState);
     });
 
-    it('Should accept GET_CARS_REUQUEST action', () => {
-        const state = carReducer(defaultState, { type: GET_CARS_REUQUEST });
+    it('Should accept GET_CARS_REQUEST action', () => {
+        const state = carReducer(defaultState, { type: GET_CARS_REQUEST });
 
         expect(state.loading).toBe(true);
         expect(state.error).toBe(null);

@@ -1,6 +1,6 @@
 import { 
     GET_CARS, 
-    GET_CARS_REUQUEST,
+    GET_CARS_REQUEST,
     GET_CARS_SUCCESS,
     GET_CARS_ERROR,
     CLEAR_CARS_PAGES, 
@@ -75,7 +75,7 @@ describe('Actions =>', () => {
         });
 
         it('should have correct actions type on start, end and error request', () => {
-            expect(action.types).toEqual([GET_CARS_REUQUEST, ENTITIES, GET_CARS_ERROR]);
+            expect(action.types).toEqual([GET_CARS_REQUEST, ENTITIES, GET_CARS_ERROR]);
         });
 
         it('should have correct endpoint for fetch data from api', () => {

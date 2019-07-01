@@ -19,4 +19,5 @@
     module.name_mapper='^config\(.*\)$' -> '<PROJECT_ROOT>/src/config/\1'
     module.name_mapper='^entities\(.*\)$' -> '<PROJECT_ROOT>/src/entities/\1'
     module.name_mapper='^helpers\(.*\)$' -> '<PROJECT_ROOT>/src/helpers/\1'
+    module.name_mapper='^selectors\(.*\)$' -> '<PROJECT_ROOT>/src/selectors/\1'
 [strict]

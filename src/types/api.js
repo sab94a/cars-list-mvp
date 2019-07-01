@@ -32,3 +32,7 @@ export type CarsResponse = {
     totalPageCount: number,
     totalCarsCount: number
 }
+
+export type CarResponse = {
+    car: Car
+}

@@ -1,7 +1,7 @@
 @import 'components/lib/variables.scss';
 
 .root {
-    display: block;
+    display: inline-block;
     height: $panel-height - $offset-lg * 2;
     align-items: center;
 }

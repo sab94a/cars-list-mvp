@@ -17,7 +17,14 @@ export const makeRequest = ({
     return fetch(endpoint, {
         method
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            return res.text().then( message => {
+                throw new Error(message)
+            })
+        }
+        return res.json()
+    })
 };
 
 export default function* apiSaga({
@@ -46,7 +53,7 @@ export default function* apiSaga({
 
         yield put({ type: SUCCESS_ACTION, payload })
     } catch(e) {
-        let payload = e.message;
+        let payload = e;
 
         if (typeof onError === 'function') {
             payload = onError(e)

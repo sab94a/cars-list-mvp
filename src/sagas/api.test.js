@@ -90,7 +90,7 @@ describe('Api Saga', () => {
 
             expect(saga.throw(error).value).toEqual(put({
                 type: Action.types[2],
-                payload: error.message
+                payload: error
             }));
         });
     });

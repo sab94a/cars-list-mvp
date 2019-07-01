@@ -1,0 +1,30 @@
+@import 'components/lib/variables.scss';
+
+.root {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    margin: auto;
+    text-align: center;
+}
+
+.title {
+    margin: 0;
+    padding: $offset-lg 0;
+    font-size: $font-size-lg; 
+}
+
+.note {
+    margin: 0;
+    font-size: $font-size-md;
+    padding: $offset-sm 0;
+
+    a {
+        text-decoration: none;
+    }
+}

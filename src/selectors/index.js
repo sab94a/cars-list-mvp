@@ -2,11 +2,12 @@
 
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
-import { Car } from '../../entities';
+import { Car } from '../entities';
 
 import type { 
-    ReduxState, 
+    ReduxState,
     CarState, 
+    CarItemState,
     EntitiesState, 
     ColorState, 
     ManufacturerState, 
@@ -15,7 +16,7 @@ import type {
 
 import { CARS_PER_PAGE } from 'constants/api'
 
-import type { PagesNavigation } from 'types/routes';
+import type { PagesNavigation, RouterProps } from 'types/routes';
 import type { CarView } from 'types/views';
 
 import { getCarInfo } from 'helpers';
@@ -23,7 +24,9 @@ import { getCarInfo } from 'helpers';
 const selectCarState = ({ cars }: ReduxState):CarState => cars;
 const selectEntitiesState = ({ entities }: ReduxState):EntitiesState => entities;
 const selectColorState = ({ colors }:ReduxState):ColorState => colors;
-const selectManufacturerState = ({ manufacturers }:ReduxState):ManufacturerState => manufacturers
+const selectManufacturerState = ({ manufacturers }:ReduxState):ManufacturerState => manufacturers;
+const selectItemCarState = ({ car }: ReduxState):CarItemState => car;
+const selectCarIdFromProps = (state: ReduxState, { match: { params } }:RouterProps):number => params.id;
 
 const selectCarsIds = createSelector(
     selectCarState,
@@ -76,4 +79,17 @@ export const selectManufacturers = createSelector(
 export const selectFilters = createSelector(
     selectCarState,
     ({ sort, color, manufacturer } ) => ({ sort, color, manufacturer })
+);
+
+export const selectCar = createSelector(
+    selectItemCarState,
+    selectCarIdFromProps,
+    selectEntitiesState,
+    ({ item }:CarItemState, propsId, entities:EntitiesState) => 
+        item && item === +propsId ? getCarInfo(denormalize(item, Car, entities)) : null
+)
+
+export const selectCarError = createSelector(
+    selectItemCarState,
+    ({ error }:CarItemState):string => error
 )

@@ -17,7 +17,7 @@ import {
     selectColors,
     selectManufacturers,
     selectFilters
-} from './selectors'
+} from 'selectors';
 
 export type StateProps = {
     cars: Array<CarView>,

@@ -10,6 +10,12 @@ export type CollectionState<Item> = {
     error: ?string
 };
 
+export type ItemState<Item> = {
+    item: ?Item,
+    loading: boolean,
+    error: ?string
+}
+
 export type PagesState<Ttem> = {
     pages: {
         [number]: Array<Ttem>
@@ -24,6 +30,7 @@ export type PagesState<Ttem> = {
 export type ColorState = CollectionState<string>;
 export type ManufacturerState = CollectionState<Manufacturer>;
 export type CarState = PagesState<number> & CarsRequestParams;
+export type CarItemState = ItemState<number>;
 
 export type EntitiesState = {
     [string]: Car
@@ -45,7 +52,7 @@ export type ActionWithData<T, P> = {
 
 export type InitAction            = ActionSimple<typeof A.INIT>;
 export type GetCarsAction         = ActionWithData<typeof A.GET_CARS, CarsRequestParams>;
-export type GetCarsRequestAction  = ActionSimple<typeof A.GET_CARS_REUQUEST>;
+export type GetCarsRequestAction  = ActionSimple<typeof A.GET_CARS_REQUEST>;
 export type GetCarsSuccessPayload = {
     page: number,
     items: Array<number>,
@@ -57,6 +64,11 @@ export type GetCarsErrorAction   = ActionWithData<typeof A.GET_CARS_ERROR, strin
 export type SetCarsFilterAction  = ActionWithData<typeof A.SET_CARS_FILTER, CarsFilters>;
 export type SetCarsPageAction    = ActionWithData<typeof A.SET_CARS_PAGE, number>;
 export type ClearCarsPagesAction = ActionSimple<typeof A.CLEAR_CARS_PAGES>;
+
+export type GetCarAction         = ActionWithData<typeof A.GET_CAR, number>;
+export type GetCarRequestAction  = ActionSimple<typeof A.GET_CAR_REQUEST>;
+export type GetCarSuccessAction  = ActionWithData<typeof A.GET_CAR_SUCCESS, number>;
+export type GetCarErrorAction    = ActionWithData<typeof A.GET_CAR_ERROR, string>;
 
 export type EntitiesPayload = {
     schema: mixed,
@@ -82,6 +94,10 @@ export type ManufacturerErrorAction = ActionWithData<typeof A.GET_MANUFACTURERS_
 
 export type Action = 
     InitAction |
+    GetCarAction |
+    GetCarRequestAction |
+    GetCarSuccessAction |
+    GetCarErrorAction |
     GetCarsAction |
     GetCarsRequestAction |
     GetCarsSuccessAction |

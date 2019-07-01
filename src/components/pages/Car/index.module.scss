@@ -1,3 +1,62 @@
+@import 'components/lib/variables.scss';
+
 .root {
-    background: red;
+    width: 100%;
+}
+
+.image {
+    min-height: 345px;
+    background-color: $light;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &.hasImage {
+        background-color: transparent;
+    }
+}
+
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: $offset-lg 0;
+}
+
+.content {
+    flex-grow: 1;
+    padding-right: 2 * $offset-lg;
+}
+
+.aside {
+    width: $offset-lg * 2 + $button-width * 2;
+    flex-shrink: 0;
+    padding: $offset-lg;
+    border: $border-width-sm solid $light;
+    text-align: right;
+
+    & > p {
+        margin: 0;
+        font-size: $font-size-sm;
+        text-align: left;
+        line-height: 1.7;
+    }
+}
+
+.title {
+    margin: 0;
+    margin-bottom: $offset-lg;
+    font-size: $font-size-lg;
+}
+
+.description {
+    font-size: $font-size-md;
+    margin-bottom: $offset-lg;
+}
+
+.note {
+    margin: 0;
+    font-size: $font-size-sm;
+    line-height: 1.8;
 }
