@@ -1,16 +1,20 @@
 //@flow 
 
-import { put, select } from "@redux-saga/core/effects";
-import { fetchColors, fetchManufacturers, getCars } from 'actions';
+import { put, select, takeEvery } from "@redux-saga/core/effects";
+import { fetchColors, fetchManufacturers, getCars, getCar, getFavourite } from 'actions';
+import { INIT_CAR, INIT_CARS } from 'constants/actions';
 
-export default function* initSaga({
+import type { Saga } from 'redux-saga';
+import type { InitCarsAction, InitCarAction } from 'types/store';
+
+export function* initCarsSaga({
     payload: {
         page,
         manufacturer,
         color,
         sort
     }
-}) {
+}:InitCarsAction):Saga<void> {
     const { cars, colors, manufacturers } = yield select();
 
     const hasCars  = !!cars.pages[cars.page]
@@ -34,3 +38,20 @@ export default function* initSaga({
         }))
     }
 };
+
+export function* initCarSaga({
+    payload
+}:InitCarAction):Saga<void> {
+    const { favourites } = yield select();
+
+    if(!favourites.length) {
+        yield put(getFavourite())
+    }
+
+    yield put(getCar(payload))
+}
+
+export default function* initSage() {
+    yield takeEvery(INIT_CARS, initCarsSaga)
+    yield takeEvery(INIT_CAR, initCarSaga)
+}

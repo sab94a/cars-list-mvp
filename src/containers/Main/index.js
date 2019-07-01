@@ -2,7 +2,7 @@
 
 import MainPage from 'components/pages/Main';
 import { connect } from 'react-redux';
-import { getCars, init } from 'actions';
+import { getCars, initCars } from 'actions';
 import { SORTINGS } from 'constants/api';
 
 import type { ReduxState, Dispatch } from 'types/store';
@@ -31,7 +31,7 @@ export type StateProps = {
 
 export type dispatchProps = {
     update: (params: CarsRequestParams) => mixed,
-    init: (params: CarsRequestParams) => mixed
+    initCars: (params: CarsRequestParams) => mixed
 }
 
 const sortings = SORTINGS.map(type => ({
@@ -51,7 +51,7 @@ const mapStateToProps = (state: ReduxState):StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch):dispatchProps => {
     return {
-        init: (params: CarsRequestParams) => dispatch(init(params)),
+        init: (params: CarsRequestParams) => dispatch(initCars(params)),
         update: (params: CarsRequestParams) => dispatch(getCars(params))
     };
 };

@@ -6,6 +6,7 @@ import { Car } from '../entities';
 
 import type { 
     ReduxState,
+    FavouriteState,
     CarState, 
     CarItemState,
     EntitiesState, 
@@ -26,6 +27,7 @@ const selectEntitiesState = ({ entities }: ReduxState):EntitiesState => entities
 const selectColorState = ({ colors }:ReduxState):ColorState => colors;
 const selectManufacturerState = ({ manufacturers }:ReduxState):ManufacturerState => manufacturers;
 const selectItemCarState = ({ car }: ReduxState):CarItemState => car;
+const selectFavouriteState = ({ favourites }: ReduxState):FavouriteState => favourites;
 const selectCarIdFromProps = (state: ReduxState, { match: { params } }:RouterProps):number => params.id;
 
 const selectCarsIds = createSelector(
@@ -92,4 +94,15 @@ export const selectCar = createSelector(
 export const selectCarError = createSelector(
     selectItemCarState,
     ({ error }:CarItemState):string => error
-)
+);
+
+export const selectFavouriteStatus = createSelector(
+    selectFavouriteState,
+    selectItemCarState,
+    (favourites:FavouriteState, { item }:CarItemState):boolean => {
+        if(item && favourites.length) {
+            return favourites.some(car => car.stockNumber === +item)
+        }
+        return false
+    }
+);

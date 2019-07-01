@@ -31,6 +31,7 @@ export type ColorState = CollectionState<string>;
 export type ManufacturerState = CollectionState<Manufacturer>;
 export type CarState = PagesState<number> & CarsRequestParams;
 export type CarItemState = ItemState<number>;
+export type FavouriteState = [Car];
 
 export type EntitiesState = {
     [string]: Car
@@ -50,7 +51,8 @@ export type ActionWithData<T, P> = {
     payload: P
 };
 
-export type InitAction            = ActionSimple<typeof A.INIT>;
+export type InitCarsAction        = ActionWithData<typeof A.INIT_CARS, CarsRequestParams>;
+export type InitCarAction         = ActionWithData<typeof A.INIT_CAR, number>;
 export type GetCarsAction         = ActionWithData<typeof A.GET_CARS, CarsRequestParams>;
 export type GetCarsRequestAction  = ActionSimple<typeof A.GET_CARS_REQUEST>;
 export type GetCarsSuccessPayload = {
@@ -92,8 +94,14 @@ export type ManufacturerSuccessPayload = Array<Manufacturer>
 export type ManufacturerSuccessAction = ActionWithData<typeof A.GET_MANUFACTURERS_SUCCESS, ManufacturerSuccessPayload>;
 export type ManufacturerErrorAction = ActionWithData<typeof A.GET_MANUFACTURERS_ERROR, string>;
 
+export type GetFavouriteAction = ActionSimple<typeof A.GET_FAVOURITE>;
+export type RemoveFavouriteAction = ActionWithData<typeof A.ADD_FAVOURITE, number>;
+export type AddFavouriteAction = ActionWithData<typeof A.REMOVE_FAVOURITE, number>;
+export type UpdateFavouriteAction = ActionWithData<typeof A.UPDATE_FAVOURITE, Array<Car>>;
+
 export type Action = 
-    InitAction |
+    InitCarsAction |
+    InitCarAction |
     GetCarAction |
     GetCarRequestAction |
     GetCarSuccessAction |
@@ -111,6 +119,10 @@ export type Action =
     ManufacturerRequestAction |
     ManufacturerSuccessAction |
     ManufacturerErrorAction |
+    GetFavouriteAction |
+    RemoveFavouriteAction |
+    AddFavouriteAction |
+    UpdateFavouriteAction |
     EntitiesAction |
     EntitiesResolveAction;
 

@@ -4,33 +4,32 @@ import React from 'react';
 import cx from 'classnames';
 
 import type { CarView } from 'types/views';
-import type { Match } from 'types/routes';
-
 import Button from 'components/lib/Button';
-
 import styles from './index.module.scss';
 
 type Props = {
     car: CarView,
-    getCar: number => void,
-    match: Match,
+    init: (id: number) => void,
+    addFavourite: (id: number) => void,
+    removeFavourite: (id: number) => void,
+    isFavourite: boolean,
     error: ?string,
     history: History
 }
 
 class Car extends React.PureComponent<Props> {
     componentDidMount() {
-        const { getCar, car, match: { params } } = this.props;
+        const { init, car } = this.props;
 
         if(!car) {
-            getCar(params.id)
+            init()
         }
     }
 
     componentDidUpdate() {
-        const { error, history } = this.props;
+        const { error, history, car } = this.props;
 
-        if(error) {
+        if(error && !car) {
             history.push('/404')
         }
     }
@@ -40,6 +39,7 @@ class Car extends React.PureComponent<Props> {
     }
 
     render() {
+        const { isFavourite, addFavourite, removeFavourite } = this.props;
         const car = this.item;
         const imageClass = cx(styles.image, { 
             [styles.hasImage]: car.image 
@@ -64,12 +64,23 @@ class Car extends React.PureComponent<Props> {
                         </p>
                     </div>
                     <aside className={ styles.aside}>
-                        <p>
-                            If you like this car, click the button and
-                            save it in your collection of favourite
-                            items.
-                        </p>
-                        <Button>Save</Button>
+                        { isFavourite ? (
+                            <>
+                                <p>
+                                    This car is actually in your collection. You can remove it. 
+                                </p>
+                                <Button onClick={ removeFavourite }>Remove</Button>
+                            </>
+                        ) : (
+                            <>  
+                                <p>
+                                    If you like this car, click the button and
+                                    save it in your collection of favourite
+                                    items.
+                                </p>
+                                <Button onClick={ addFavourite }>Save</Button>
+                            </>
+                        ) }
                     </aside>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 // @flow
 
 import {
-    INIT,
+    INIT_CARS,
+    INIT_CAR,
     GET_CARS, 
     GET_CARS_REQUEST,
     GET_CARS_SUCCESS,
@@ -20,7 +21,11 @@ import {
     SET_CARS_FILTER, 
     SET_CARS_PAGE,
     ENTITIES,
-    API_REQUEST
+    API_REQUEST,
+    GET_FAVOURITE,
+    ADD_FAVOURITE,
+    REMOVE_FAVOURITE,
+    UPDATE_FAVOURITE
 } from 'constants/actions';
 
 import { API_CARS, API_COLORS, API_MANUFACTURERS } from 'constants/api';
@@ -36,14 +41,20 @@ import type {
 } from 'types/api';
 
 import type { 
-    InitAction,
+    InitCarsAction,
     GetCarAction,
     GetCarsAction, 
     SetCarsFilterAction, 
     SetCarsPageAction, 
     ClearCarsPagesAction,
-    EntitiesPayload
+    EntitiesPayload,
+    GetFavouriteAction,
+    RemoveFavouriteAction,
+    AddFavouriteAction,
+    UpdateFavouriteAction
 } from 'types/store';
+
+import type { Car as CarType } from 'types/models';
 
 
 export const getCars = (payload: CarsRequestParams):GetCarsAction => ({
@@ -70,10 +81,15 @@ export const clearCarsPages = ():ClearCarsPagesAction => ({
     type: CLEAR_CARS_PAGES
 });
 
-export const init = (params: CarsRequestParams):InitAction => ({
-    type: INIT,
+export const initCars = (params: CarsRequestParams):InitCarsAction => ({
+    type: INIT_CARS,
     payload: params
-})
+});
+
+export const initCar = (number: number):InitCarAction => ({
+    type: INIT_CAR,
+    payload: number
+});
 
 export const fetchCars = ({
     page,
@@ -125,4 +141,23 @@ export const fetchManufacturers = ():ApiRequestAction => ({
     type: API_REQUEST,
     types: [GET_MANUFACTURERS_REQUEST, GET_MANUFACTURERS_SUCCESS, GET_MANUFACTURERS_ERROR],
     onSuccess: ({ manufacturers }) => manufacturers
+});
+
+export const getFavourite = ():GetFavouriteAction => ({
+    type: GET_FAVOURITE
+});
+
+export const addFavourite = (id: number):AddFavouriteAction => ({
+    type: ADD_FAVOURITE,
+    payload: id
+});
+
+export const removeFavourite = (id: number):RemoveFavouriteAction => ({
+    type: REMOVE_FAVOURITE,
+    payload: id
+});
+
+export const updateFavourite = (cars: Array<CarType>):UpdateFavouriteAction => ({
+    type: UPDATE_FAVOURITE,
+    payload: cars
 });
