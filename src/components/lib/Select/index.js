@@ -2,18 +2,21 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { SelectItem, Select as SelectType } from 'components/lib/types'
+import type { SelectItem, Select as Props } from 'components/lib/types'
 import styles from './index.module.scss';
 
-export default class Select extends React.PureComponent<SelectType> {
+type State = {
+    open: boolean
+}
+
+export default class Select extends React.PureComponent<Props, State> {
     static placeholder = 'None';
     static clearSelectValue = '/';
 
     static defaultProps = {
         value: null,
         placeholder: Select.placeholder,
-        options: [],
-        onChange: () => null
+        options: []
     };
 
     state = {
@@ -33,7 +36,7 @@ export default class Select extends React.PureComponent<SelectType> {
         return [this.emptyOption, ...this.props.options]
     };
 
-    findItem = (value:string) => {
+    findItem = (value: ?string) => {
         for (let item of this.props.options) {
             if (item.value === value) {
                 return item;
@@ -47,11 +50,13 @@ export default class Select extends React.PureComponent<SelectType> {
             this.handlers[value] = (event: SyntheticEvent<*>) => {
                 event.preventDefault();
 
+                let result = value;
+
                 if (value === Select.clearSelectValue) {
-                    this.props.onChange(false)
-                } else {
-                    this.props.onChange(value)
+                    result = null
                 }
+
+                this.props.onChange(result)
 
                 this.setState({
                     open: false

@@ -1,31 +1,21 @@
 //@flow
 
 import * as A from 'constants/actions';
-import type { Car } from './models'
-
-export type ApiRequestParams = {
-    endpoint: string,
-    method?: string,
-    query?: mixed,
-    onSuccess?: (res: any) => mixed,
-    onError?: (res: any) => mixed
-};
-
-export type ApiRequestAction = {
-    type: typeof A.API_REQUEST,
-    types: Array<string>,
-} & ApiRequestParams;
-
-export type SortFilter = 'asc' | 'des';
+import type { Car, Manufacturer } from './models'
 
 export type CarsFilters = {
-    manufacturer: ?string,
-    color: ?string,
-    sort: ?SortFilter
+    manufacturer?: ?string,
+    color?: ?string,
+    sort?: ?string
 }
+
 export type CarsRequestParams = {
-    page: number
+    page?: number
 } & CarsFilters;
+
+export type CarResponse = {
+    car: Car
+}
 
 export type CarsResponse = {
     cars: Array<Car>,
@@ -33,6 +23,23 @@ export type CarsResponse = {
     totalCarsCount: number
 }
 
-export type CarResponse = {
-    car: Car
+export type ColorsResponse = {
+    colors: Array<string>
 }
+
+export type ManufacturersResponse = {
+    manufacturers: Array<Manufacturer>
+}
+
+export type ApiRequestParams = {
+    endpoint: string,
+    method?: string,
+    query?: mixed,
+    onSuccess?: (res: any) => any,
+    onError?: (res: any) => any
+};
+
+export type ApiRequestAction = {
+    type: typeof A.API_REQUEST,
+    types: Array<string>,
+} & ApiRequestParams;

@@ -6,6 +6,7 @@ import qs from 'query-string';
 import type { PagesNavigation } from 'types/routes';
 import type { CarView, SelectView } from 'types/views';
 import type { CarsFilters } from 'types/api';
+import type { State as FilterFormState } from 'components/pages/Main/FiltersForm';
 
 import Card from 'components/lib/Card';
 import Link from 'components/lib/Link';
@@ -19,6 +20,7 @@ export type Props = {
     init: (params: mixed) => void,
     update: (params: mixed) => void,
     removeFavourite: (id: number) => void,
+    navigate: (params: mixed) => void,
     cars: Array<CarView>,
     colors: Array<SelectView>,
     sortings: Array<SelectView>,
@@ -26,8 +28,7 @@ export type Props = {
     carsLoading: boolean,
     navigation: ?PagesNavigation,
     filters: CarsFilters,
-    location: Location,
-    history: History
+    search: string,
 }
 
 class Main extends React.PureComponent<Props> {
@@ -35,20 +36,22 @@ class Main extends React.PureComponent<Props> {
 
     handlers = {};
 
+    placeholder:Array<boolean> = new Array(10).fill(false);
+
     componentDidMount() {
         this.props.init(this.getParams())
     };
 
-    componentDidUpdate({ location: { search: prevSearch } }: Props) {
-        const { location: { search } } = this.props;
+    componentDidUpdate({ search: prevSearch }: Props) {
+        const { search, update } = this.props;
 
         if (search !== prevSearch) {
-            this.props.update(this.getParams())
+            update(this.getParams())
         }
     }
 
     getParams() {
-        const { location: { search } } = this.props;
+        const { search } = this.props;
         const { page, manufacturer, color, sort } = qs.parse(search);
 
         return {
@@ -59,8 +62,8 @@ class Main extends React.PureComponent<Props> {
         };
     }
 
-    onFilterChange = (params) => {
-        const { location: { pathname }, history } = this.props
+    onFilterChange = (params: CarsFilters) => {
+        const { navigate } = this.props
 
         let query = {}
 
@@ -72,13 +75,12 @@ class Main extends React.PureComponent<Props> {
 
         query.page = 1
 
-        history.push({
-            pathname,
+        navigate({
             search: `?${qs.stringify(query)}`
         })
     }
 
-    onFilterFormSubmit = ({ manufacturer, color }) => {
+    onFilterFormSubmit = ({ manufacturer, color}: FilterFormState) => {
         this.onFilterChange({
             ...this.getParams(),
             manufacturer,
@@ -86,7 +88,7 @@ class Main extends React.PureComponent<Props> {
         })
     }
 
-    onShorChange = (sort) => {
+    onShortChange = (sort: ?string) => {
         this.onFilterChange({
             ...this.getParams(),
             sort
@@ -121,8 +123,6 @@ class Main extends React.PureComponent<Props> {
             </>
         )
     }
-
-    placeholder:Array<boolean> = new Array(10).fill(false);
 
     render() {
         const { 
@@ -163,7 +163,7 @@ class Main extends React.PureComponent<Props> {
                                 label={ Main.SortLabel }
                                 value={ filters.sort }
                                 options={ sortings }
-                                onChange={ this.onShorChange }
+                                onChange={ this.onShortChange }
                             />
                         </div>
                     </div>

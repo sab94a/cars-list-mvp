@@ -19,8 +19,12 @@ export type Match = {
     }
 }
 
+export type RouterHistory = {
+    push(path: string | mixed): void,
+}
+
 export type RouterProps = {
     match: Match,
     location: Location,
-    history: History
+    history: RouterHistory
 }

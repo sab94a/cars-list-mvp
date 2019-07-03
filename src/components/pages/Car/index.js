@@ -12,8 +12,8 @@ type Props = {
     init: () => void,
     addFavourite: () => void,
     removeFavourite: () => void,
-    error: ?string,
-    history: History
+    navigate: (path: string) => void,
+    error: ?string
 }
 
 class Car extends React.PureComponent<Props> {
@@ -26,10 +26,10 @@ class Car extends React.PureComponent<Props> {
     }
 
     componentDidUpdate() {
-        const { error, history, car } = this.props;
+        const { error, navigate, car } = this.props;
 
         if(error && !car) {
-            history.push('/404')
+            navigate('/404')
         }
     }
 

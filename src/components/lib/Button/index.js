@@ -1,11 +1,11 @@
 // @flow
 
 import React from 'react';
-import { Button as ButtonType } from 'components/lib/types'
+import type { Button as Props} from 'components/lib/types'
 import styles from './index.module.scss';
 
-const Button = ({ children, ...rest }: ButtonType) => (
+const Button = ({ children, ...rest }: Props) => (
     <button {...rest } className={ styles.root } >{ children }</button>
 );
 
-export default React.memo(Button)
+export default React.memo<Props>(Button)

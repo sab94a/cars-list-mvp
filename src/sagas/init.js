@@ -17,7 +17,7 @@ export function* initCarsSaga({
 }:InitCarsAction):Saga<void> {
     const { cars, favourites } = yield select();
 
-    const hasCars  = !!cars.pages[cars.page]
+    const hasCars       = !!cars.pages[cars.page]
     const hasFavourites = !!favourites.length;
 
     yield fork(initFilters)
@@ -42,7 +42,7 @@ export function* initFavourites({
         color,
         sort
     } 
-}: InitFavouriteAction) {
+}: InitFavouriteAction):Saga<void> {
     const { favourites } = yield select();
 
     const hasFavourites = !!favourites.length;
@@ -58,10 +58,10 @@ export function* initFavourites({
     }
 }
 
-export function* initFilters() {
+export function* initFilters():Saga<void> {
     const { colors, manufacturers } = yield select();
 
-    const hasColor = !!colors.items.length;
+    const hasColor         = !!colors.items.length;
     const hasManufacturer  = !!manufacturers.items.length;
 
     if(!hasColor) {
@@ -85,7 +85,7 @@ export function* initCarSaga({
     yield put(getCar(payload))
 }
 
-export default function* initSage() {
+export default function* initSage():Saga<void> {
     yield takeEvery(INIT_CARS, initCarsSaga)
     yield takeEvery(INIT_CAR, initCarSaga)
     yield takeEvery(INIT_FAVOURITIES, initFavourites)

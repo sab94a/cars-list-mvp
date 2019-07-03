@@ -2,16 +2,12 @@
 
 import React from 'react';
 import Link from  'components/lib/Link';
-import type { NavItem } from 'components/lib/types';
+import type { Navigation as Props } from 'components/lib/types';
 import styles from './index.module.scss';
-
-type Props = {
-    items: Array<NavItem>
-};
 
 const Navigation = ({ items }: Props) => (
     <nav className={ styles.root }>
-        { items.map(({ href, title }:NavItem, index:number) => (
+        { items.map(({ href, title }, index) => (
             <Link key={ index } href={ href } className={ styles.link }>{ title }</Link>
         )) }
     </nav>

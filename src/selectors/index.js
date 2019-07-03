@@ -7,43 +7,43 @@ import { Car } from '../entities';
 import type { 
     ReduxState,
     FavouriteState,
-    CarState, 
-    CarItemState,
+    CarsState, 
+    CarState,
     EntitiesState, 
     ColorState, 
-    ManufacturerState, 
-    Manufacturer 
+    ManufacturerState
 } from 'types/store';
 
 import { CARS_PER_PAGE } from 'constants/api'
 
 import type { PagesNavigation, RouterProps } from 'types/routes';
 import type { CarView, SelectView } from 'types/views';
+import type { Manufacturer } from 'types/models';
 
 import { getCarInfo } from 'helpers';
 
-const selectCarState = ({ cars }: ReduxState):CarState => cars;
+const selectCarsState = ({ cars }: ReduxState):CarsState => cars;
 const selectEntitiesState = ({ entities }: ReduxState):EntitiesState => entities;
 const selectColorState = ({ colors }:ReduxState):ColorState => colors;
 const selectManufacturerState = ({ manufacturers }:ReduxState):ManufacturerState => manufacturers;
-const selectItemCarState = ({ car }: ReduxState):CarItemState => car;
+const selectItemCarsState = ({ car }: ReduxState):CarState => car;
 const selectFavouriteState = ({ favourites }: ReduxState):FavouriteState => favourites;
 const selectCarIdFromProps = (state: ReduxState, { match: { params } }:RouterProps):number => +params.id;
 
 const selectCarsIds = createSelector(
-    selectCarState,
-    ({ pages, page }:CarState):Array<number> => pages[page] || []
+    selectCarsState,
+    ({ pages, page }:CarsState):Array<number> => pages[page] || []
 );
 
 export const selectCarsLoading = createSelector(
-    selectCarState,
-    ({ loading }:CarState):boolean => loading
+    selectCarsState,
+    ({ loading }:CarsState):boolean => loading
 );
 
 export const selectNavigation = createSelector(
-    selectCarState,
+    selectCarsState,
     selectCarsIds,
-    ({ totalPages, totalItems, page }:CarState, currents:Array<number>):PagesNavigation => {
+    ({ totalPages, totalItems, page }:CarsState, currents:Array<number>):PagesNavigation => {
         const shownItems = (page - 1) * CARS_PER_PAGE + currents.length;
 
         return {
@@ -80,16 +80,16 @@ export const selectManufacturers = createSelector(
 );
 
 export const selectFilters = createSelector(
-    selectCarState,
+    selectCarsState,
     ({ sort, color, manufacturer } ) => ({ sort, color, manufacturer })
 );
 
 export const selectCar = createSelector(
-    selectItemCarState,
+    selectItemCarsState,
     selectCarIdFromProps,
     selectEntitiesState,
     selectFavouriteState,
-    ({ item }:CarItemState, propsId:number, entities:EntitiesState, { items }:FavouriteState):?CarView => {
+    ({ item }:CarState, propsId:number, entities:EntitiesState, { items }:FavouriteState):?CarView => {
         if (item && item === propsId) {
             return getCarInfo(denormalize(item, Car, entities), items)
         }
@@ -99,8 +99,8 @@ export const selectCar = createSelector(
 )
 
 export const selectCarError = createSelector(
-    selectItemCarState,
-    ({ error }:CarItemState):string => error
+    selectItemCarsState,
+    ({ error }:CarState) => error
 );
 
 export const selectFavourites = createSelector(

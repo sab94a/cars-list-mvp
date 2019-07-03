@@ -18,15 +18,33 @@ export type Card = {
     elemType?: string
 }
 
+export type Link = {
+    children: React$Node,
+    href: Path,
+    className?: ?string
+}
+
+export type Navigation = {
+    items: Array<NavItem>
+}
+
+export type Paginator = {
+    total: number,
+    active: number,
+}
+
 export type SelectItem = {
     value: string,
     title: string
 }
 
 export type Select = {
-    defaultValue: string,
-    placeholder: ?string,
-    options: Array<React$Node>
+    value: ?string,
+    placeholder: string,
+    label: ?string,
+    options: Array<SelectItem>,
+    className?: string,
+    onChange: (value: ?string) => void
 }
 
 export type Button = {

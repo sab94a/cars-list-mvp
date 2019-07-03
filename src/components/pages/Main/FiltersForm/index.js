@@ -3,61 +3,66 @@
 import React from 'react';
 import Select from 'components/lib/Select';
 import Button from 'components/lib/Button';
+
+import type { SelectView } from 'types/views';
+
 import styles from './index.module.scss';
 
-export type Props = {
-    color: string,
-    manufacturer: string,
-    colors: Array<string>,
-    manufacturers: Array<string>
-}
+export type State = {
+    color?: ?string,
+    manufacturer?: ?string
+};
 
-class FiltersForm extends React.PureComponent<Props> {
+export type Props = {
+    color?: ?string,
+    colors: Array<SelectView>,
+    manufacturer?: ?string,
+    manufacturers: Array<SelectView>,
+    onSubmit: (value: State) => void
+};
+
+class FiltersForm extends React.PureComponent<Props, State> {
     static Titles = {
         Color: 'Color',
         Manufacturer: 'Manufacturer',
         Submit: 'Filter'
-    }
+    };
 
     static Placeholders = {
         Color: 'All car colors',
         Manufacturer: 'All manufacturers'
-    }
+    };
 
     static Fields = {
         Color: 'color',
         Manufacturer: 'manufacturer'
-    }
-    
-    static defaultProps = {
-        onSubmit: () => null
-    }
+    };
     
     state = {
         color: this.props.color,
         manufacturer: this.props.manufacturer
     }
 
-    handlers = {}
+    handlers = {};
 
-    bindChange(field) {
+    bindChange(field: string) {
         if(!this.handlers[field]) {
-            this.handlers[field] = value => {
+            this.handlers[field] = (value: string) => {
                 this.setState({
                     [field]: value
-                })
-            }
-        }
+                });
+            };
+        };
         return this.handlers[field];
     };
 
-    onSubmit = e => {
+    onSubmit = (e:SyntheticEvent<*>) => {
         e.preventDefault();
 
-        this.props.onSubmit(this.state)
+        this.props.onSubmit(this.state);
     };
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps:Props) {
         // I know about this article https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state
         // But I think that in this expamle it's probably only one solution
         // Because we should have it's own state and we should update state, when props changed
@@ -68,15 +73,15 @@ class FiltersForm extends React.PureComponent<Props> {
         let state = {};
 
         if (color !== prevProps.color) {
-            state.color = color
+            state.color = color;
         };
 
         if (manufacturer !== prevProps.manufacturer) {
-            state.manufacturer = manufacturer
+            state.manufacturer = manufacturer;
         };
 
         if(Object.keys(state).length) {
-            this.setState(state)
+            this.setState(state);
         };
     }
 

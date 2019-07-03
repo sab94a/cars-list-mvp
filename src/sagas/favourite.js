@@ -16,7 +16,7 @@ const setLS = (map) =>
     localStorage.setItem(FAVOURITE_KEY, JSON.stringify(map))
 
 function* getFavourite({
-    payload = {}
+    payload
 }:GetFavouriteAction):Saga<void> {
     const { favourites: { sort } } = yield select();
     const LsFavourites = getLS();
@@ -27,15 +27,15 @@ function* getFavourite({
         cars.push(LsFavourites[id]);
     };
 
-    if(payload.color) {
+    if(payload && payload.color) {
         cars = cars.filter(item => item.color === payload.color)
     }
 
-    if(payload.manufacturer) {
+    if(payload && payload.manufacturer) {
         cars = cars.filter(item => item.manufacturerName === payload.manufacturer)
     }
 
-    if(payload.sort) {
+    if(payload && payload.sort) {
         if (sort === SORTINGS[0]) {
             cars = cars.sort((a, b) => b.mileage.number - a.mileage.number)
         } else {

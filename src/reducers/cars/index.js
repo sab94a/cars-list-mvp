@@ -1,6 +1,6 @@
 // @flow
 
-import type { CarState, Action } from 'types/store';
+import type { CarsState, Action } from 'types/store';
 import {
     GET_CARS_REQUEST,
     GET_CARS_SUCCESS,
@@ -10,7 +10,7 @@ import {
     SET_CARS_PAGE
 } from 'constants/actions';
 
-export const defaultState: CarState = {
+export const defaultState: CarsState = {
     pages: {},
     error: null,
     loading: false,
@@ -22,7 +22,7 @@ export const defaultState: CarState = {
     totalItems: 0
 }
 
-const carReducer = (state:CarState = defaultState, action: Action):CarState => {
+const carReducer = (state:CarsState = defaultState, action: Action):CarsState => {
     switch(action.type) {
         case GET_CARS_REQUEST:
             return {

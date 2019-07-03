@@ -10,7 +10,7 @@ const defaultState = {
     sort: null,
 }
 
-const favouritesReducer = (state:FavouriteState = defaultState, action: Action):ColorState => {
+const favouritesReducer = (state:FavouriteState = defaultState, action: Action):FavouriteState => {
     switch(action.type) {
         case UPDATE_FAVOURITE:
             return {

@@ -8,7 +8,7 @@ import { SORTINGS } from 'constants/api';
 import type { ReduxState, Dispatch } from 'types/store';
 import type { CarsRequestParams, CarsFilters } from 'types/api';
 import type { CarView, SelectView } from 'types/views';
-import type { PagesNavigation } from 'types/routes';
+import type { PagesNavigation, RouterProps } from 'types/routes';
 
 import { 
     selectCars, 
@@ -26,13 +26,15 @@ export type StateProps = {
     colors: Array<SelectView>,
     manufacturers: Array<SelectView>,
     sortings: Array<SelectView>,
-    filters: CarsFilters
+    filters: CarsFilters,
+    search: string
 }
 
 export type dispatchProps = {
+    init: (params: CarsRequestParams) => mixed,
     update: (params: CarsRequestParams) => mixed,
-    initCars: (params: CarsRequestParams) => mixed,
-    removeFavourite: (id: number) => mixed
+    removeFavourite: (id: number) => mixed,
+    navigate: (path: mixed | string) => void
 }
 
 const sortings = SORTINGS.map(type => ({
@@ -40,21 +42,23 @@ const sortings = SORTINGS.map(type => ({
     value: type
 }));
 
-const mapStateToProps = (state: ReduxState):StateProps => ({
+const mapStateToProps = (state: ReduxState, { location: { search } }:RouterProps):StateProps => ({
     cars: selectCars(state),
     carsLoading: selectCarsLoading(state),
     navigation: selectNavigation(state),
     colors: selectColors(state),
     manufacturers: selectManufacturers(state),
     filters: selectFilters(state),
+    search,
     sortings
 });
 
-const mapDispatchToProps = (dispatch: Dispatch):dispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch, { history: { push } }: RouterProps):dispatchProps => {
     return {
         init: (params: CarsRequestParams) => dispatch(initCars(params)),
         update: (params: CarsRequestParams) => dispatch(getCars(params)),
-        removeFavourite: (id: number) => dispatch(removeFavourite(id))
+        removeFavourite: (id: number) => dispatch(removeFavourite(id)),
+        navigate: push
     };
 };
 

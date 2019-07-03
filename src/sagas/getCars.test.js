@@ -1,5 +1,3 @@
-//@flow
-
 import { put, select } from "@redux-saga/core/effects";
 import { setCarsFilters, clearCarsPages, fetchCars, setCarsPage } from 'actions';
 import getCars from './getCars';

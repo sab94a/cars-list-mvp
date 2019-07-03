@@ -32,6 +32,8 @@ export const Navigation= [{
     href: RoutesMap.Root.path
 }];
 
+// TODO: Keep all strings in config and pass it to components through React Context
+
 export const Strings = {
     copyright: '© AUTO1 Group 2018'
 }

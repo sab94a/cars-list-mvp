@@ -19,7 +19,7 @@ export const getCarInfo = ({
     fuelType,
     pictureUrl,
     color
-}:Car, favourites:Array<Car>):CarView => ({
+}:Car, favourites:?Array<Car>):CarView => ({
     stockNumber,
     title: `${ manufacturerName } ${ modelName }`,
     image: pictureUrl,

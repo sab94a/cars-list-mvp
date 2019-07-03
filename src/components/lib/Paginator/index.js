@@ -4,12 +4,8 @@ import React from 'react';
 import qs from 'query-string';
 import cx from 'classnames';
 import Link from 'components/lib/Link';
+import type { Paginator as Props } from 'components/lib/types';
 import styles from './index.module.scss';
-
-type Props = {
-    total: number,
-    active: number,
-}
 
 class Paginator extends React.PureComponent<Props> {
     static Query = 'page'
@@ -20,7 +16,7 @@ class Paginator extends React.PureComponent<Props> {
         Last: 'Last'
     }
 
-    buildQuerySearch(page: number) {
+    buildQuerySearch(page: number):?string {
         const { total, active } = this.props;
 
         if (page === active || page < 1 || page > total) {

@@ -2,14 +2,9 @@
 
 import React from 'react';
 import cx from 'classnames';
-import type { Node, AbstractComponent } from 'react';
-import type { Path } from 'components/lib/types';
+import type { AbstractComponent } from 'react';
+import type { Link as Props } from 'components/lib/types';
 import styles from './index.module.scss';
-
-type Props = {
-    children: Node,
-    href: Path
-}
 
 class Link extends React.Component<Props> {
     static Component: AbstractComponent<*> | string = 'a';
