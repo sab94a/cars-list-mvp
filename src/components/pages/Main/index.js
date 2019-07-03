@@ -8,6 +8,8 @@ import type { CarView, SelectView } from 'types/views';
 import type { CarsFilters } from 'types/api';
 import type { State as FilterFormState } from 'components/pages/Main/FiltersForm';
 
+import { CARS_PER_PAGE } from 'constants/api';
+
 import Card from 'components/lib/Card';
 import Link from 'components/lib/Link';
 import Select from 'components/lib/Select';
@@ -36,7 +38,7 @@ class Main extends React.PureComponent<Props> {
 
     handlers = {};
 
-    placeholder:Array<boolean> = new Array(10).fill(false);
+    placeholder:Array<boolean> = new Array(CARS_PER_PAGE).fill(false);
 
     componentDidMount() {
         this.props.init(this.getParams())

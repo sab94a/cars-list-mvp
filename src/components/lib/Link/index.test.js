@@ -30,10 +30,17 @@ describe('<Link />', () => {
         expect(component.find('a').prop('href')).toEqual(href);
     });
 
-    it('Should pass extra params', () => {
+    it('Should have correct className', () => {
         const className = 'test';
         create({ href, title, className });
 
-        expect(component.find('a').prop('className')).toEqual(className);
+        expect(component.find('a').prop('className')).toEqual(expect.stringContaining(className));
+    });
+
+    it('Should pass extra props', () => {
+        const target = '_blank';
+        create({ href, title, target });
+
+        expect(component.find('a').prop('target')).toEqual(target); 
     });
 });

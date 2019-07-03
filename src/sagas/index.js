@@ -1,4 +1,5 @@
 // @flow
+
 import { takeEvery, fork } from "@redux-saga/core/effects";
 import type { Saga } from 'redux-saga';
 import { API_REQUEST, ENTITIES, GET_CARS, GET_CAR } from 'constants/actions';

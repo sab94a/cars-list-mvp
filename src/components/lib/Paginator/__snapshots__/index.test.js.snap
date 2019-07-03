@@ -13,7 +13,7 @@ exports[`<Paginator /> Should render correctly 1`] = `
       href="?page=1"
     >
       <a
-        className="link"
+        className="link root"
         href="?page=1"
       >
         First
@@ -24,7 +24,7 @@ exports[`<Paginator /> Should render correctly 1`] = `
       href="?page=1"
     >
       <a
-        className="link"
+        className="link root"
         href="?page=1"
       >
         Previous
@@ -40,7 +40,7 @@ exports[`<Paginator /> Should render correctly 1`] = `
       href="?page=3"
     >
       <a
-        className="link"
+        className="link root"
         href="?page=3"
       >
         Next
@@ -51,7 +51,7 @@ exports[`<Paginator /> Should render correctly 1`] = `
       href="?page=10"
     >
       <a
-        className="link"
+        className="link root"
         href="?page=10"
       >
         Last

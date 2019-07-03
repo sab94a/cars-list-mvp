@@ -2,11 +2,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
 import Main from 'components/pages/Main';
-import * as selectors from './selectors';
+import * as selectors from '../../selectors';
 import MainContainer from './';
 
 jest.mock('components/pages/Main');
-jest.mock('./selectors');
+jest.mock('../../selectors');
 Main.mockImplementation(() => null);
 
 const storeFake = state => {
@@ -19,6 +19,15 @@ const storeFake = state => {
 }; 
 
 describe('container <Main />', () => {
+    const ownProps = {
+        history: {
+            push: () => null
+        },
+        location: {
+            search: '?ssss'
+        }
+    }
+
     let wrapper;
     let component;
     let container;
@@ -27,8 +36,8 @@ describe('container <Main />', () => {
         const store = storeFake({});
 
         wrapper = mount(
-            <Provider store={store}>
-                <MainContainer />
+            <Provider store={ store }>
+                <MainContainer {...ownProps} />
             </Provider>
         );
 
@@ -45,7 +54,24 @@ describe('container <Main />', () => {
         const expectedPropKeys = [
             'cars',
             'carsLoading',
-            'navigation'
+            'navigation',
+            'navigation',
+            'colors',
+            'manufacturers',
+            'filters',
+            'search',
+            'sortings'
+        ]; 
+
+        expect(Object.keys(component.props())).toEqual(expect.arrayContaining(expectedPropKeys));
+    });
+
+    it('should map dispatch to props', () => {
+        const expectedPropKeys = [
+            'init',
+            'update',
+            'removeFavourite',
+            'navigate'
         ]; 
 
         expect(Object.keys(component.props())).toEqual(expect.arrayContaining(expectedPropKeys));

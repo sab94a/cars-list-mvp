@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotFound /> Should render correctly 1`] = `
+<NotFound>
+  <div
+    className="root"
+  >
+    <div
+      className="wrapper"
+    >
+      <Logo>
+        <img
+          alt="Logo"
+          className="root"
+          src="logo.png"
+        />
+      </Logo>
+      <h1
+        className="title"
+      >
+        404 - Not Found
+      </h1>
+      <p
+        className="note"
+      >
+        Sorry, the page you are looking for does not exist.
+      </p>
+      <p
+        className="note"
+      >
+        You can always go back to the 
+        <Link
+          href="/"
+        >
+          <a
+            className="root"
+            href="/"
+          >
+            homepage.
+          </a>
+        </Link>
+      </p>
+    </div>
+  </div>
+</NotFound>
+`;

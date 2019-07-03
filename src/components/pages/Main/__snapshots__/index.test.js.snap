@@ -7,13 +7,15 @@ exports[`<Main /> page component Should render correctly 1`] = `
       Object {
         "description": "description_0",
         "image": "image_0.png",
+        "isFavourite": false,
         "link": "?cars/0/",
-        "stockNumber": 1,
+        "stockNumber": 0,
         "title": "title 0",
       },
       Object {
         "description": "description_1",
         "image": "image_1.png",
+        "isFavourite": false,
         "link": "?cars/1/",
         "stockNumber": 1,
         "title": "title 1",
@@ -21,63 +23,89 @@ exports[`<Main /> page component Should render correctly 1`] = `
       Object {
         "description": "description_2",
         "image": "image_2.png",
+        "isFavourite": true,
         "link": "?cars/2/",
-        "stockNumber": 1,
+        "stockNumber": 2,
         "title": "title 2",
       },
       Object {
         "description": "description_3",
         "image": "image_3.png",
+        "isFavourite": false,
         "link": "?cars/3/",
-        "stockNumber": 1,
+        "stockNumber": 3,
         "title": "title 3",
       },
       Object {
         "description": "description_4",
         "image": "image_4.png",
+        "isFavourite": false,
         "link": "?cars/4/",
-        "stockNumber": 1,
+        "stockNumber": 4,
         "title": "title 4",
       },
       Object {
         "description": "description_5",
         "image": "image_5.png",
+        "isFavourite": false,
         "link": "?cars/5/",
-        "stockNumber": 1,
+        "stockNumber": 5,
         "title": "title 5",
       },
       Object {
         "description": "description_6",
         "image": "image_6.png",
+        "isFavourite": true,
         "link": "?cars/6/",
-        "stockNumber": 1,
+        "stockNumber": 6,
         "title": "title 6",
       },
       Object {
         "description": "description_7",
         "image": "image_7.png",
+        "isFavourite": false,
         "link": "?cars/7/",
-        "stockNumber": 1,
+        "stockNumber": 7,
         "title": "title 7",
       },
       Object {
         "description": "description_8",
         "image": "image_8.png",
+        "isFavourite": false,
         "link": "?cars/8/",
-        "stockNumber": 1,
+        "stockNumber": 8,
         "title": "title 8",
       },
       Object {
         "description": "description_9",
         "image": "image_9.png",
+        "isFavourite": false,
         "link": "?cars/9/",
-        "stockNumber": 1,
+        "stockNumber": 9,
         "title": "title 9",
       },
     ]
   }
-  carsLoading={false}
-  fetchData={
+  colors={
+    Array [
+      Object {
+        "title": "black",
+        "value": "black",
+      },
+      Object {
+        "title": "white",
+        "value": "white",
+      },
+    ]
+  }
+  filters={
+    Object {
+      "color": "",
+      "manufacturers": "",
+      "sortings": "",
+    }
+  }
+  init={
     [MockFunction] {
       "calls": Array [
         Array [
@@ -97,11 +125,23 @@ exports[`<Main /> page component Should render correctly 1`] = `
       ],
     }
   }
-  location={
-    Object {
-      "search": "",
-    }
+  manufacturers={
+    Array [
+      Object {
+        "title": "value 1",
+        "value": "value 1",
+      },
+      Object {
+        "title": "value 2",
+        "value": "value 2",
+      },
+      Object {
+        "title": "value 3",
+        "value": "value 3",
+      },
+    ]
   }
+  navigate={[MockFunction]}
   navigation={
     Object {
       "page": 10,
@@ -110,6 +150,17 @@ exports[`<Main /> page component Should render correctly 1`] = `
       "totalPages": 100,
     }
   }
+  removeFavourite={[MockFunction]}
+  search=""
+  sortings={
+    Array [
+      Object {
+        "title": "asc",
+        "value": "des",
+      },
+    ]
+  }
+  update={[MockFunction]}
 >
   <div
     className="root"
@@ -117,15 +168,187 @@ exports[`<Main /> page component Should render correctly 1`] = `
     <aside
       className="aside"
     >
-      Heading Asside
+      <FiltersForm
+        color=""
+        colors={
+          Array [
+            Object {
+              "title": "black",
+              "value": "black",
+            },
+            Object {
+              "title": "white",
+              "value": "white",
+            },
+          ]
+        }
+        manufacturers={
+          Array [
+            Object {
+              "title": "value 1",
+              "value": "value 1",
+            },
+            Object {
+              "title": "value 2",
+              "value": "value 2",
+            },
+            Object {
+              "title": "value 3",
+              "value": "value 3",
+            },
+          ]
+        }
+        onSubmit={[Function]}
+      >
+        <form
+          className="root"
+          onSubmit={[Function]}
+        >
+          <Select
+            className="select"
+            label="Color"
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "title": "black",
+                  "value": "black",
+                },
+                Object {
+                  "title": "white",
+                  "value": "white",
+                },
+              ]
+            }
+            placeholder="All car colors"
+            value=""
+          >
+            <div
+              className="select root"
+              onBlur={[Function]}
+              tabIndex="0"
+            >
+              <div
+                className="label"
+              >
+                Color
+              </div>
+              <div
+                className="selected"
+                onClick={[Function]}
+              >
+                All car colors
+              </div>
+            </div>
+          </Select>
+          <Select
+            className="select"
+            label="Manufacturer"
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "title": "value 1",
+                  "value": "value 1",
+                },
+                Object {
+                  "title": "value 2",
+                  "value": "value 2",
+                },
+                Object {
+                  "title": "value 3",
+                  "value": "value 3",
+                },
+              ]
+            }
+            placeholder="All manufacturers"
+            value={null}
+          >
+            <div
+              className="select root"
+              onBlur={[Function]}
+              tabIndex="0"
+            >
+              <div
+                className="label"
+              >
+                Manufacturer
+              </div>
+              <div
+                className="selected"
+                onClick={[Function]}
+              >
+                All manufacturers
+              </div>
+            </div>
+          </Select>
+          <Memo(Button)
+            type="submit"
+          >
+            <button
+              className="root"
+              type="submit"
+            >
+              Filter
+            </button>
+          </Memo(Button)>
+        </form>
+      </FiltersForm>
     </aside>
     <div
       className="content"
     >
       <div
-        className="searchResult"
+        className="searchHeader"
       >
-        Showing 10 of 1000 results
+        <div
+          className="searchInfo"
+        >
+          <h2>
+            Available cars
+          </h2>
+          <div
+            className="searchResult"
+          >
+            Showing 10 of 1000 results
+          </div>
+        </div>
+        <div
+          className="sort"
+        >
+          <Select
+            label="Sort by"
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "title": "asc",
+                  "value": "des",
+                },
+              ]
+            }
+            placeholder="None"
+            value={null}
+          >
+            <div
+              className="root"
+              onBlur={[Function]}
+              tabIndex="0"
+            >
+              <div
+                className="label"
+              >
+                Sort by
+              </div>
+              <div
+                className="selected"
+                onClick={[Function]}
+              >
+                None
+              </div>
+            </div>
+          </Select>
+        </div>
       </div>
       <ul
         className="items"
@@ -134,11 +357,13 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_0"
           elemType="li"
           footer={
-            <Link
-              href="?cars/0/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/0/"
+              >
+                View details
+              </Link>
+            </React.Fragment>
           }
           image="image_0.png"
           key="0"
@@ -175,6 +400,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/0/"
                 >
                   <a
+                    className="root"
                     href="?cars/0/"
                   >
                     View details
@@ -188,11 +414,13 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_1"
           elemType="li"
           footer={
-            <Link
-              href="?cars/1/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/1/"
+              >
+                View details
+              </Link>
+            </React.Fragment>
           }
           image="image_1.png"
           key="1"
@@ -229,6 +457,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/1/"
                 >
                   <a
+                    className="root"
                     href="?cars/1/"
                   >
                     View details
@@ -242,11 +471,24 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_2"
           elemType="li"
           footer={
-            <Link
-              href="?cars/2/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/2/"
+              >
+                View details
+              </Link>
+              <React.Fragment>
+                <span
+                  className="separator"
+                />
+                <Link
+                  href="#"
+                  onClick={[Function]}
+                >
+                  Remove from favourites
+                </Link>
+              </React.Fragment>
+            </React.Fragment>
           }
           image="image_2.png"
           key="2"
@@ -283,9 +525,25 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/2/"
                 >
                   <a
+                    className="root"
                     href="?cars/2/"
                   >
                     View details
+                  </a>
+                </Link>
+                <span
+                  className="separator"
+                />
+                <Link
+                  href="#"
+                  onClick={[Function]}
+                >
+                  <a
+                    className="root"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    Remove from favourites
                   </a>
                 </Link>
               </div>
@@ -296,11 +554,13 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_3"
           elemType="li"
           footer={
-            <Link
-              href="?cars/3/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/3/"
+              >
+                View details
+              </Link>
+            </React.Fragment>
           }
           image="image_3.png"
           key="3"
@@ -337,6 +597,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/3/"
                 >
                   <a
+                    className="root"
                     href="?cars/3/"
                   >
                     View details
@@ -350,11 +611,13 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_4"
           elemType="li"
           footer={
-            <Link
-              href="?cars/4/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/4/"
+              >
+                View details
+              </Link>
+            </React.Fragment>
           }
           image="image_4.png"
           key="4"
@@ -391,6 +654,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/4/"
                 >
                   <a
+                    className="root"
                     href="?cars/4/"
                   >
                     View details
@@ -404,11 +668,13 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_5"
           elemType="li"
           footer={
-            <Link
-              href="?cars/5/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/5/"
+              >
+                View details
+              </Link>
+            </React.Fragment>
           }
           image="image_5.png"
           key="5"
@@ -445,6 +711,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/5/"
                 >
                   <a
+                    className="root"
                     href="?cars/5/"
                   >
                     View details
@@ -458,11 +725,24 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_6"
           elemType="li"
           footer={
-            <Link
-              href="?cars/6/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/6/"
+              >
+                View details
+              </Link>
+              <React.Fragment>
+                <span
+                  className="separator"
+                />
+                <Link
+                  href="#"
+                  onClick={[Function]}
+                >
+                  Remove from favourites
+                </Link>
+              </React.Fragment>
+            </React.Fragment>
           }
           image="image_6.png"
           key="6"
@@ -499,9 +779,25 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/6/"
                 >
                   <a
+                    className="root"
                     href="?cars/6/"
                   >
                     View details
+                  </a>
+                </Link>
+                <span
+                  className="separator"
+                />
+                <Link
+                  href="#"
+                  onClick={[Function]}
+                >
+                  <a
+                    className="root"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    Remove from favourites
                   </a>
                 </Link>
               </div>
@@ -512,11 +808,13 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_7"
           elemType="li"
           footer={
-            <Link
-              href="?cars/7/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/7/"
+              >
+                View details
+              </Link>
+            </React.Fragment>
           }
           image="image_7.png"
           key="7"
@@ -553,6 +851,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/7/"
                 >
                   <a
+                    className="root"
                     href="?cars/7/"
                   >
                     View details
@@ -566,11 +865,13 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_8"
           elemType="li"
           footer={
-            <Link
-              href="?cars/8/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/8/"
+              >
+                View details
+              </Link>
+            </React.Fragment>
           }
           image="image_8.png"
           key="8"
@@ -607,6 +908,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/8/"
                 >
                   <a
+                    className="root"
                     href="?cars/8/"
                   >
                     View details
@@ -620,11 +922,13 @@ exports[`<Main /> page component Should render correctly 1`] = `
           description="description_9"
           elemType="li"
           footer={
-            <Link
-              href="?cars/9/"
-            >
-              View details
-            </Link>
+            <React.Fragment>
+              <Link
+                href="?cars/9/"
+              >
+                View details
+              </Link>
+            </React.Fragment>
           }
           image="image_9.png"
           key="9"
@@ -661,6 +965,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
                   href="?cars/9/"
                 >
                   <a
+                    className="root"
                     href="?cars/9/"
                   >
                     View details
@@ -683,7 +988,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
             href="?page=1"
           >
             <a
-              className="link"
+              className="link root"
               href="?page=1"
             >
               First
@@ -694,7 +999,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
             href="?page=9"
           >
             <a
-              className="link"
+              className="link root"
               href="?page=9"
             >
               Previous
@@ -710,7 +1015,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
             href="?page=11"
           >
             <a
-              className="link"
+              className="link root"
               href="?page=11"
             >
               Next
@@ -721,7 +1026,7 @@ exports[`<Main /> page component Should render correctly 1`] = `
             href="?page=100"
           >
             <a
-              className="link"
+              className="link root"
               href="?page=100"
             >
               Last

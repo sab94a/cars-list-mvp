@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
+import Link from 'components/lib/Link';
 import Paginator from './';
 
 
@@ -31,10 +32,10 @@ describe('<Paginator />', () => {
         create({ active: 2, total: 10 });
         
         const $content = component.find('.content');
-        const $first = component.find('.root').childAt(0);
-        const $prev = component.find('.root').childAt(1);
-        const $next = component.find('.root').childAt(3);
-        const $last = component.find('.root').childAt(4);
+        const $first = component.find(Link).at(0);
+        const $prev = component.find(Link).at(1);
+        const $next = component.find(Link).at(2);
+        const $last = component.find(Link).at(3);
 
         expect($content.text()).toBe('Page 2 of 10');
         expect($first.text()).toBe(Paginator.Titles.First);
@@ -49,15 +50,15 @@ describe('<Paginator />', () => {
     it('Should have correct links', () => {
         create({ active: 3, total: 10 });
 
-        const $first = component.find('.root').childAt(0);
-        const $prev = component.find('.root').childAt(1);
-        const $next = component.find('.root').childAt(3);
-        const $last = component.find('.root').childAt(4);
+        const $first = component.find(Link).at(0);
+        const $prev = component.find(Link).at(1);
+        const $next = component.find(Link).at(2);
+        const $last = component.find(Link).at(3);
 
         expect($first.prop('href')).toBe('?page=1');
         expect($prev.prop('href')).toBe('?page=2');
         expect($next.prop('href')).toBe('?page=4');
-        expect($last.prop('href')).toBe('?page=10');
+        expect($last.prop('href')).toBe('?page=10'); 
     });
 
     it('If location have other search, it should add page to current seach', () => {
@@ -65,7 +66,7 @@ describe('<Paginator />', () => {
 
         create({ active: 3, total: 10 });
 
-        const $first = component.find('.root').childAt(0);
+        const $first = component.find(Link).at(0);
 
         expect($first.prop('href')).toBe('?color=width&page=1');
 
@@ -75,19 +76,19 @@ describe('<Paginator />', () => {
     it('Should render SPAN instead of Link if active page 1', () => {
         create({ active: 1, total: 10 });
 
-        const $first = component.find('.root').childAt(0);
-        const $prev = component.find('.root').childAt(1);
+        const $first = component.children().childAt(0);
+        const $prev = component.children().childAt(1);
 
         expect($first.type()).toBe('span');
         expect($prev.type()).toBe('span');
     });
 
     it('Should render SPAN instead of Link if active page is last', () => {
-        create({ active: 1, total: 10 });
+        create({ active: 10, total: 10 });
 
-        const $next = component.find('.root').childAt(3);
-        const $last = component.find('.root').childAt(4);
-
+        const $next = component.children().childAt(3);
+        const $last = component.children().childAt(4);
+       
         expect($next.type()).toBe('span');
         expect($last.type()).toBe('span');
     });

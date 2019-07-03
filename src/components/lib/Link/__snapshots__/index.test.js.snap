@@ -5,6 +5,7 @@ exports[`<Link /> Should render correctly 1`] = `
   href="/path"
 >
   <a
+    className="root"
     href="/path"
   >
     title

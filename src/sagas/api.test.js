@@ -20,7 +20,10 @@ const Action = {
 
 const setMock = () => {
     fetchMock = jest.spyOn(global, 'fetch')
-    fetchMock.mockReturnValue(Promise.resolve({ json: () => payload }))
+    fetchMock.mockReturnValue(Promise.resolve({ 
+        json: () => payload, 
+        text: () => Promise.resolve('error') 
+    })); 
 }
 
 describe('MakeRequest', () => {  

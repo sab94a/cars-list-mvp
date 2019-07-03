@@ -18,12 +18,16 @@ export const makeRequest = ({
         method
     })
     .then(res => {
-        if (!res.ok) {
-            return res.text().then( message => {
-                throw new Error(message)
-            })
+        if (res.ok) {
+            return res.json()
         }
-        return res.json()
+
+        throw res
+    })
+    .catch(e => {
+        return e.text().then( message => {
+            throw new Error(message)
+        })
     })
 };
 

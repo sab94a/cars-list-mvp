@@ -24,7 +24,7 @@ exports[`<Navigation /> Should be rendered correctly 1`] = `
       key="0"
     >
       <a
-        className="link"
+        className="link root"
         href="href"
       >
         title
@@ -36,7 +36,7 @@ exports[`<Navigation /> Should be rendered correctly 1`] = `
       key="1"
     >
       <a
-        className="link"
+        className="link root"
         href="href2"
       >
         title2

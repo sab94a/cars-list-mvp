@@ -81,7 +81,7 @@ export const selectManufacturers = createSelector(
 
 export const selectFilters = createSelector(
     selectCarsState,
-    ({ sort, color, manufacturer } ) => ({ sort, color, manufacturer })
+    ({ sort, color, manufacturer }:CarsState ) => ({ sort, color, manufacturer })
 );
 
 export const selectCar = createSelector(
