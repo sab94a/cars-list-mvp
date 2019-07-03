@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
 import Main from 'components/pages/Main';
 import * as selectors from '../../selectors';
-import MainContainer from './';
+import FavouritesContainer from './';
 
 jest.mock('components/pages/Main');
 jest.mock('../../selectors');
@@ -18,7 +18,7 @@ const storeFake = state => {
     };
 }; 
 
-describe('container <Main />', () => {
+describe('container <Favourites />', () => {
     const ownProps = {
         history: {
             push: () => null
@@ -37,11 +37,11 @@ describe('container <Main />', () => {
 
         wrapper = mount(
             <Provider store={ store }>
-                <MainContainer {...ownProps} />
+                <FavouritesContainer {...ownProps} />
             </Provider>
         );
 
-        container = wrapper.find(MainContainer);
+        container = wrapper.find(FavouritesContainer);
         component = container.find(Main);
     });
 
@@ -53,8 +53,6 @@ describe('container <Main />', () => {
     it('should map state to props', () => {
         const expectedPropKeys = [
             'cars',
-            'carsLoading',
-            'navigation',
             'colors',
             'manufacturers',
             'filters',

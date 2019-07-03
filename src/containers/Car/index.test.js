@@ -1,13 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
-import Main from 'components/pages/Main';
+import Car from 'components/pages/Car';
 import * as selectors from '../../selectors';
-import MainContainer from './';
+import CarContainer from './';
 
-jest.mock('components/pages/Main');
+jest.mock('components/pages/Car');
 jest.mock('../../selectors');
-Main.mockImplementation(() => null);
+Car.mockImplementation(() => null);
 
 const storeFake = state => {
     return {
@@ -18,13 +18,13 @@ const storeFake = state => {
     };
 }; 
 
-describe('container <Main />', () => {
+describe('container <Car />', () => {
     const ownProps = {
         history: {
             push: () => null
         },
-        location: {
-            search: '?ssss'
+        match: {
+            params: {}
         }
     }
 
@@ -37,12 +37,12 @@ describe('container <Main />', () => {
 
         wrapper = mount(
             <Provider store={ store }>
-                <MainContainer {...ownProps} />
+                <CarContainer {...ownProps} />
             </Provider>
         );
 
-        container = wrapper.find(MainContainer);
-        component = container.find(Main);
+        container = wrapper.find(CarContainer);
+        component = container.find(Car);
     });
 
     it('should render both the container and the component ', () => {
@@ -52,23 +52,17 @@ describe('container <Main />', () => {
 
     it('should map state to props', () => {
         const expectedPropKeys = [
-            'cars',
-            'carsLoading',
-            'navigation',
-            'colors',
-            'manufacturers',
-            'filters',
-            'search',
-            'sortings'
+            'car',
+            'error'
         ]; 
 
-        expect(Object.keys(component.props())).toEqual(expect.arrayContaining(expectedPropKeys));
+        expect(Object.keys(component.props())).toEqual(expect.arrayContaining(expectedPropKeys)); 
     });
 
     it('should map dispatch to props', () => {
         const expectedPropKeys = [
             'init',
-            'update',
+            'addFavourite',
             'removeFavourite',
             'navigate'
         ]; 

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Car /> page component Should render correctly 1`] = `
+<Car
+  addFavourite={[MockFunction]}
+  car={
+    Object {
+      "description": "description",
+      "image": "image_car.png",
+      "isFavourite": false,
+      "stockNumber": 1,
+      "title": "My Super Car",
+    }
+  }
+  init={[MockFunction]}
+  navigate={[MockFunction]}
+  removeFavourite={[MockFunction]}
+  update={[MockFunction]}
+>
+  <div
+    className="root"
+  >
+    <div
+      className="image hasImage"
+      style={
+        Object {
+          "backgroundImage": "url(image_car.png)",
+        }
+      }
+    />
+    <div
+      className="wrapper"
+    >
+      <div
+        className="content"
+      >
+        <h1
+          className="title"
+        >
+          My Super Car
+        </h1>
+        <p
+          className="description"
+        >
+          description
+        </p>
+        <p
+          className="note"
+        >
+          This car is currently available and can be delivered as soon as tomorrow morning. Please be aware that delivery times shown in this page are not definitive and may change due to bad weather conditions.
+        </p>
+      </div>
+      <aside
+        className="aside"
+      >
+        <p>
+          If you like this car, click the button and save it in your collection of favourite items.
+        </p>
+        <Memo(Button)
+          onClick={[MockFunction]}
+        >
+          <button
+            className="root"
+            onClick={[MockFunction]}
+          >
+            Save
+          </button>
+        </Memo(Button)>
+      </aside>
+    </div>
+  </div>
+</Car>
+`;

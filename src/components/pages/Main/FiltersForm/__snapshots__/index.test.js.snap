@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FiltersForm /> Should render correctly 1`] = `
+<FiltersForm
+  color="white"
+  colors={
+    Array [
+      Object {
+        "title": "black",
+        "value": "black",
+      },
+      Object {
+        "title": "white",
+        "value": "white",
+      },
+    ]
+  }
+  manufacturer="value_2"
+  manufacturers={
+    Array [
+      Object {
+        "title": "value_1",
+        "value": "value_1",
+      },
+      Object {
+        "title": "value_2",
+        "value": "value_2",
+      },
+      Object {
+        "title": "value_3",
+        "value": "value_3",
+      },
+    ]
+  }
+  onSubmit={[MockFunction]}
+>
+  <form
+    className="root"
+    onSubmit={[Function]}
+  >
+    <Select
+      className="select"
+      label="Color"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "title": "black",
+            "value": "black",
+          },
+          Object {
+            "title": "white",
+            "value": "white",
+          },
+        ]
+      }
+      placeholder="All car colors"
+      value="white"
+    >
+      <div
+        className="select root"
+        onBlur={[Function]}
+        tabIndex="0"
+      >
+        <div
+          className="label"
+        >
+          Color
+        </div>
+        <div
+          className="selected"
+          onClick={[Function]}
+        >
+          white
+        </div>
+      </div>
+    </Select>
+    <Select
+      className="select"
+      label="Manufacturer"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "title": "value_1",
+            "value": "value_1",
+          },
+          Object {
+            "title": "value_2",
+            "value": "value_2",
+          },
+          Object {
+            "title": "value_3",
+            "value": "value_3",
+          },
+        ]
+      }
+      placeholder="All manufacturers"
+      value="value_2"
+    >
+      <div
+        className="select root"
+        onBlur={[Function]}
+        tabIndex="0"
+      >
+        <div
+          className="label"
+        >
+          Manufacturer
+        </div>
+        <div
+          className="selected"
+          onClick={[Function]}
+        >
+          value_2
+        </div>
+      </div>
+    </Select>
+    <Memo(Button)
+      type="submit"
+    >
+      <button
+        className="root"
+        type="submit"
+      >
+        Filter
+      </button>
+    </Memo(Button)>
+  </form>
+</FiltersForm>
+`;

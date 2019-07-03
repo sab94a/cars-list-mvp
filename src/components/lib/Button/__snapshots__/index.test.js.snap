@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> Should render correctly 1`] = `
+<Memo(Button)>
+  <button
+    className="root"
+  />
+</Memo(Button)>
+`;

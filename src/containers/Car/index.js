@@ -12,8 +12,7 @@ import { initCar, addFavourite, removeFavourite } from 'actions';
 
 export type StateProps = {
     car: ?CarView,
-    error: ?string,
-    isFavourite: boolean,
+    error: ?string
 };
 
 export type dispatchProps = {
@@ -23,7 +22,7 @@ export type dispatchProps = {
     navigate: (path: mixed | string) => void
 };
 
-const mapStateToProps = (state:ReduxState, props: RouterProps) => ({
+const mapStateToProps = (state:ReduxState, props: RouterProps):StateProps => ({
     car: selectCar(state, props),
     error: selectCarError(state)
 });

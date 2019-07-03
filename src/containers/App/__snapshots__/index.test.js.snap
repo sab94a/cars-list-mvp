@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`container <App /> Should render correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "default": [MockFunction],
+      "dispatch": [MockFunction],
+      "getState": [Function],
+      "subscribe": [MockFunction],
+    }
+  }
+>
+  <BrowserRouter>
+    <Layout
+      footerText="copyright"
+      navigation={
+        Array [
+          Object {
+            "href": "/test",
+            "title": "title_1",
+          },
+          Object {
+            "href": "/test_2",
+            "title": "title_2",
+          },
+        ]
+      }
+    >
+      <Switch>
+        <Route
+          component="component_1"
+          key="0"
+          path="path_1"
+        />
+        <Route
+          component="component_2"
+          key="1"
+          path="path_2"
+        />
+      </Switch>
+    </Layout>
+  </BrowserRouter>
+</Provider>
+`;
