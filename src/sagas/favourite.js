@@ -4,7 +4,7 @@ import { put, select, takeEvery } from "@redux-saga/core/effects";
 
 import { GET_FAVOURITE, ADD_FAVOURITE, REMOVE_FAVOURITE } from 'constants/actions';
 import { FAVOURITE_KEY, SORTINGS } from 'constants/api';
-import { updateFavourite } from 'actions'
+import { updateFavourite } from 'actions';
 
 import type { Saga } from 'redux-saga';
 import type { GetFavouriteAction, RemoveFavouriteAction, AddFavouriteAction } from 'types/store';
@@ -15,10 +15,9 @@ const getLS = () =>
 const setLS = (map) =>
     localStorage.setItem(FAVOURITE_KEY, JSON.stringify(map))
 
-function* getFavourite({
+export function* getFavourite({
     payload
 }:GetFavouriteAction):Saga<void> {
-    const { favourites: { sort } } = yield select();
     const LsFavourites = getLS();
 
     let cars = [];
@@ -36,7 +35,7 @@ function* getFavourite({
     }
 
     if(payload && payload.sort) {
-        if (sort === SORTINGS[0]) {
+        if (payload.sort === SORTINGS[0]) {
             cars = cars.sort((a, b) => b.mileage.number - a.mileage.number)
         } else {
             cars = cars.sort((a, b) => a.mileage.number - b.mileage.number)
@@ -49,7 +48,7 @@ function* getFavourite({
     }));
 }
 
-function* addFavourite({ payload }:AddFavouriteAction):Saga<void> {
+export function* addFavourite({ payload }:AddFavouriteAction):Saga<void> {
     const { entities: { cars }, favourites: { items } } = yield select();
 
     const LsFavourites = getLS();
@@ -62,7 +61,7 @@ function* addFavourite({ payload }:AddFavouriteAction):Saga<void> {
     yield put(updateFavourite({ items: [item, ...items] }));
 }
 
-function* removeFavourite({ payload }:RemoveFavouriteAction):Saga<void> {
+export function* removeFavourite({ payload }:RemoveFavouriteAction):Saga<void> {
     const { favourites: { items } } = yield select();
     const LsFavourites = getLS();
     const cars = items.filter(item => payload !== item.stockNumber);
