@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Select /> Should render correctly 1`] = `
+<Select
+  className="extraClass"
+  label="Label"
+  onChange={[MockFunction]}
+  options={
+    Array [
+      Object {
+        "title": "titile_1",
+        "value": "value_1",
+      },
+      Object {
+        "title": "title_2",
+        "value": "value_2",
+      },
+    ]
+  }
+  placeholder="Placeholder"
+  value="value_1"
+>
+  <div
+    className="extraClass root"
+    onBlur={[Function]}
+    tabIndex="0"
+  >
+    <div
+      className="label"
+    >
+      Label
+    </div>
+    <div
+      className="selected"
+      onClick={[Function]}
+    >
+      titile_1
+    </div>
+  </div>
+</Select>
+`;
