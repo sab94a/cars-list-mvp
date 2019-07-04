@@ -3,7 +3,7 @@
 import type { FavouriteState, Action } from 'types/store';
 import { UPDATE_FAVOURITE } from 'constants/actions';
 
-const defaultState = {
+export const defaultState = {
     items: [],
     color: null,
     manufacturer: null,

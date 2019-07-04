@@ -5,17 +5,17 @@ import {
     GET_CARS_ERROR
 } from 'constants/actions';
 
-import carReducer, { defaultState } from './';
+import carsReducer, { defaultState } from './';
 
-describe('CarReducer => ', () => {
+describe('Cars Reducer => ', () => {
     it('Should return correct default state', () => {
-        const state = carReducer(undefined, {});
+        const state = carsReducer(undefined, {});
 
         expect(state).toEqual(defaultState);
     });
 
     it('Should accept GET_CARS_REQUEST action', () => {
-        const state = carReducer(defaultState, { type: GET_CARS_REQUEST });
+        const state = carsReducer(defaultState, { type: GET_CARS_REQUEST });
 
         expect(state.loading).toBe(true);
         expect(state.error).toBe(null);
@@ -35,7 +35,7 @@ describe('CarReducer => ', () => {
                 10: [1, 2]
             }
         }
-        const state = carReducer(prevState, { type: GET_CARS_SUCCESS, payload });
+        const state = carsReducer(prevState, { type: GET_CARS_SUCCESS, payload });
 
         expect(state.pages[payload.page]).toEqual(items);
         expect(state.pages[10]).toEqual(prevState.pages[10]);
@@ -53,14 +53,14 @@ describe('CarReducer => ', () => {
                 10: [1, 2]
             }
         }
-        const state = carReducer(prevState, { type: CLEAR_CARS_PAGES });
+        const state = carsReducer(prevState, { type: CLEAR_CARS_PAGES });
 
         expect(Object.keys(state.pages)).toHaveLength(0);
     })
 
     it('Should accept GET_CARS_ERROR action', () => {
         const payload = 'error';
-        const state = carReducer(defaultState, { type: GET_CARS_ERROR, payload });
+        const state = carsReducer(defaultState, { type: GET_CARS_ERROR, payload });
 
         expect(state.loading).toBe(false);
         expect(state.error).toBe(payload);
